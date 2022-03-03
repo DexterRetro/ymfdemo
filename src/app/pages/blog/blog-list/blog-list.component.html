@@ -17,6 +17,10 @@
   <div class="sk-cube sk-cube8"></div>
   <div class="sk-cube sk-cube9"></div>
 </div>
+<div *ngIf="NoBlogs" style="text-align: center;">
+  <h3>Articles Not Available</h3>
+  <i class="far fa-folder-open  fa-10x"></i>
+</div>
   <div class="cards animate__animated animate__fadeIn" *ngIf="blogs">
     <div class="card animate__animated animate__fadeInUp" *ngFor="let blog of blogs; let i = index" [routerLink]="'/blog/'+blog._id">
       <img [src]="getImageUrl(blog.blogPicture)" alt="">

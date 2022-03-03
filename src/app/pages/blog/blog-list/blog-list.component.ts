@@ -12,6 +12,7 @@ export class BlogListComponent implements OnInit {
   blogs:BlogPost[]=[];
   images:[]=[];
   showLoader=true;
+  NoBlogs=false;
   constructor(private blogServ:BlogService,private router:Router) { 
     this.GetBlogs();
   }
@@ -31,7 +32,7 @@ export class BlogListComponent implements OnInit {
       this.blogs = b.Blogs;
       this.showLoader =false
       if(!this.blogs||this.blogs.length<1){
-        this.router.navigateByUrl('/home');
+        this.NoBlogs=true;
       }
     });
     
