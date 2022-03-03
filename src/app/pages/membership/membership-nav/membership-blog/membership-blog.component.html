@@ -1,0 +1,88 @@
+<div class="main">
+    <div style="text-align: left;">
+      <h3>YMF Article Upload</h3>
+    <p>Have interesting stories or lessons to share with other young Miners?</p>
+    <p>You can Upload your short article here for it to be featured on the Website or even the YMF Magazine</p>
+  
+    <h4 style="color: red;">Important!</h4>
+    <p>1.Documents in .doc or .docx (word) are the only ones accepted</p>
+    <p>2.The document should follow the Template. You can view the Template <a style="color: #ffcd04; cursor: pointer; font-size: 20px;" [href]="docuLink()"> <b>Here</b></a></p>
+    <p>3.It should not include pictures! they can be uploaded here on the website</p>
+    </div>
+    
+    <input
+              id="input-file-id" hidden
+              type="file"
+              accept=".doc,.docx"
+              (change)="onFileChange($event)"/>
+    <label for="input-file-id" class="documentUpload">{{DocumentBTN}} <i class="fas fa-file-upload"></i></label>
+     <br>
+     <div class="sk-chase" *ngIf="loadingBlog">
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+    </div>
+    <h3 *ngIf="loadingBlog">Reading Document....</h3>
+   
+    <div class="UploadedBlog" *ngIf="blog">
+      <h2>Article Preview</h2>
+      <div class="Header" >
+        <div class="headers">
+            <h1>{{blog.Topic}}</h1>
+            <h3>{{blog.Summary}}</h3>
+        </div>
+        <img *ngIf="CoverPhoto" [src]="CoverPhoto" alt="" class="animate__animated animate__fadeIn">
+         <div class="info">
+            <h4><i class="fas fa-user-edit"></i>By {{blog.Author}} <br></h4>
+         </div>
+         <input
+         id="cover-file-id" hidden
+         type="file"
+         accept="image/png, image/gif, image/jpeg"
+         (change)="SetCoverPhoto($event)"/>
+        <label for="cover-file-id" class="documentUpload">{{ ButtonCoverPhoto()}} <i class="far fa-image"></i></label>
+      </div>
+      <p style="color: red;" *ngIf="!CoverPhoto">Cover Photo Required!</p>
+        <div class="Content">
+            <div class="paragraph" *ngFor="let para of blog.Content;let i = index">
+                <p>{{para.paragraph}}</p>
+                <div class="images" *ngIf="ImbededImages[i].Image">
+                    <div class="image">
+                        <img [src]="ImbededImages[i].Image" alt="">
+                   </div>
+                </div>
+                <input
+                        [id]="'imbded'+i+'Image-file-id'" hidden
+                        type="file"
+                        accept="image/png, image/gif, image/jpeg"
+                        (change)="ImbedImagesFn($event,i)"/>
+                
+              <label [for]="'imbded'+i+'Image-file-id'" class="documentUpload">{{InsertPhotoBtn(i)}} <i class="far fa-images"></i></label>
+              <input
+                        [id]="'imbded'+i+'Image-file-id'" hidden
+                        type="file"
+                        accept="image/png, image/gif, image/jpeg"
+                        (change)="ImbedImagesFn($event,i)"/>
+                        <div class="Spacer" ></div>
+                        <div class="Spacer" ></div>
+                        <div class="Spacer" ></div>
+              <label [for]="'imbded'+i+'Image-file-id'" class="documentUpload ImageRemove">Remove Image <i class="far fa-trash-alt"></i></label><br><br>
+              <form class="ImageCaption">
+                <mat-form-field class="example-full-width" appearance="fill" style="width: 70%; height: auto;" *ngIf="ImbededImages[i]">
+                  <mat-label>Image Caption</mat-label>
+                  <input matInput #caption maxlength="35" placeholder="Caption of Image" (change)="updateCaption($event,i)">
+                  <button *ngIf="this.Captions[i]!==''" matSuffix mat-icon-button aria-label="Clear" (click)="this.Captions[i]=''">
+                  </button>
+                  <mat-hint align="start"><strong>Max 35 Characters</strong> </mat-hint>
+                  <mat-hint align="end">{{caption.value.length}} / 35</mat-hint>
+                </mat-form-field>
+              </form>            
+  
+            </div>
+        </div>
+        <button *ngIf="blog" class="finalUploadBTN" mat-raised-button (click)="uploadBlog($event)">UPLOAD ARTICLE</button>
+    </div>
+  </div>

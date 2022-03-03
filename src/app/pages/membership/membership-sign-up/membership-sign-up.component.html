@@ -1,0 +1,335 @@
+<section>
+  <div class="left">
+    <div class="content">
+      <img
+        class="animate__animated animate__fadeIn"
+        src="assets/ymfTransAlt.png"
+        alt=""
+      />
+      <p>
+        To assist, represent, coordinate and/or network Zimbabwean youths in
+        mining.
+      </p>
+    </div>
+  </div>
+  <div class="right">
+    <img class="Icon" src="assets/ymfTransAlt.png" alt="" />
+    <mat-tab-group mat-align-tabs="center" class="tabs">
+      <mat-tab label="NEW MEMBER">
+        <mat-horizontal-stepper linear>
+          <mat-step [stepControl]="userSignUpForm">
+            <ng-template matStepLabel>Sign Up Details</ng-template>
+            <form class="formPanel animate__animated animate__fadeIn" [formGroup]="userSignUpForm" novalidate>
+              <h1>YMF Members Sign Up</h1>
+              <mat-form-field appearance="standard" style="width: 80%">
+                <mat-label>First Name(s)</mat-label>
+                <input
+                  matInput
+                  placeholder="Your Full First Names"
+                  formControlName="firstName"
+                />
+              </mat-form-field>
+              <p style="color: red" *ngIf="userSignUpForm.controls['firstName'].invalid&&(userSignUpForm.controls['firstName'].dirty||userSignUpForm.controls['firstName'].touched)">
+                Please Enter A valid Name
+              </p>
+              <mat-form-field appearance="standard" style="width: 80%">
+                <mat-label>Surname</mat-label>
+                <input
+                  matInput
+                  placeholder="Your Full Surname"
+                  formControlName="surname"
+                />
+              </mat-form-field>
+              <p style="color: red" *ngIf="userSignUpForm.controls['surname'].invalid&&(userSignUpForm.controls['surname'].dirty||userSignUpForm.controls['surname'].touched)">
+                Please Enter A valid Surname
+              </p>
+              <mat-form-field appearance="standard" style="width: 80%">
+                <mat-label>Email </mat-label>
+                <input
+                  matInput
+                  placeholder="Email@email.com"
+                  formControlName="email"
+                />
+              </mat-form-field>
+              <p style="color: red" *ngIf="userSignUpForm.controls['email'].invalid&&(userSignUpForm.controls['email'].dirty||userSignUpForm.controls['email'].touched)">Please Enter A valid Email</p>
+              <mat-form-field appearance="standard" style="width: 80%">
+                <mat-label>Phone Number </mat-label>
+
+                <input
+                  matInput
+                  placeholder="mobile number "
+                  formControlName="phone"
+                />
+                <mat-hint>e.g 0771 234 567 </mat-hint>
+              </mat-form-field>
+              <p style="color: red" *ngIf="userSignUpForm.controls['phone'].invalid&&(userSignUpForm.controls['phone'].dirty||userSignUpForm.controls['phone'].touched)">
+                Please Enter A valid Phone Number
+              </p>
+              <mat-form-field appearance="standard" style="width: 80%">
+                <mat-label>National Id Number</mat-label>
+                <input
+                  matInput
+                  placeholder="I.D"
+                  formControlName="id"
+                  (input)="IdFormarter($event)"
+                />
+              </mat-form-field>
+              <p style="color: red" *ngIf="userSignUpForm.controls['id'].invalid&&(userSignUpForm.controls['id'].dirty||userSignUpForm.controls['id'].touched)">
+                Please Enter A valid I.D Number
+              </p>
+              <mat-form-field appearance="standard">
+                <mat-label>Select Province</mat-label>
+                <mat-select
+                  placeholder="Province"
+                  style="width: 80%"
+                  formControlName="province"
+                >
+                  <mat-option *ngFor="let prov of provinces" [value]="prov">
+                    {{ prov }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <p style="color: red" *ngIf="userSignUpForm.controls['province'].invalid&&(userSignUpForm.controls['province'].dirty||userSignUpForm.controls['province'].touched)">
+                Please Select Your Province
+              </p>
+              <mat-form-field appearance="standard" style="width: 80%">
+                <mat-label>Password</mat-label>
+                <input
+                  type="password"
+                  matInput
+                  placeholder="Password"
+                  formControlName="password"
+                />
+              </mat-form-field>
+              <p style="color: red" *ngIf="userSignUpForm.controls['password'].invalid&&(userSignUpForm.controls['password'].dirty||userSignUpForm.controls['password'].touched)">
+                Enter a valid password with a minimum of 8 characters
+              </p>
+              <p style="color: red" *ngIf="userSignUpForm.controls['passwordConfirm'].invalid&&(userSignUpForm.controls['passwordConfirm'].dirty||userSignUpForm.controls['passwordConfirm'].touched)">
+                Password Do Not Match
+              </p>
+              <mat-form-field appearance="standard" style="width: 80%">
+                <mat-label>Cornfirm Password</mat-label>
+                <input
+                  type="password"
+                  matInput
+                  placeholder="Cornfirm Password"
+                  formControlName="passwordConfirm"
+                />
+              </mat-form-field>
+              <p style="color: red" *ngIf="userSignUpForm.controls['passwordConfirm'].invalid&&(userSignUpForm.controls['passwordConfirm'].dirty||userSignUpForm.controls['passwordConfirm'].touched)">
+                Password Do Not Match
+              </p>
+              <br>
+              <button mat-raised-button matStepperNext>
+               Next
+              </button>
+              
+            </form>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Payments</ng-template>
+            <h3>To Complete Sign Up, You Need to Pay a Registration fee</h3>
+            <label id="payOptions-group-label">Select A Payment Option</label>
+            <mat-radio-group aria-labelledby="payOptions-group-label"
+              class="example-radio-group"
+              [(ngModel)]="SelectedPayment">
+              <mat-radio-button class="radio-button" value="paynow"> 
+                <img style="width: 100%; " src="assets/Paynow_Dark.svg" alt="PayNow Options">
+                <form [formGroup]="payNowForm" novalidate *ngIf="(SelectedPayment==='paynow')">
+                  <label >Select Registration Fee</label><br>
+                  <mat-form-field appearance="standard">
+                    <mat-label>Fees</mat-label>
+                    <mat-select formControlName="cart">
+                      <mat-option value="regOnly">Registraion fee Only $15usd</mat-option>
+                      <mat-option value="regWithID">Registration with PVC card $25usd</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <br>
+                  <button [disabled]="!payNowForm.valid" mat-button *ngIf="!SigningUp" type="submit" (click)="SignUp()">PAY NOW</button>
+                  <div class="sk-chase" *ngIf="SigningUp">
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                  </div>
+                </form>
+              </mat-radio-button>
+              <mat-radio-button class="radio-button" value="other"> 
+                <img style="width: 100%; " src="assets/innMkuruPay.png" alt="PayNow Options">
+                <form [formGroup]="otherForm" novalidate *ngIf="(SelectedPayment==='other')">
+                  <label >Select Payment Platform</label><br>
+                  <mat-form-field appearance="standard">
+                    <mat-label>Payment Platform</mat-label>
+                    <mat-select formControlName="payment">
+                      <mat-option value="mkuru">MKURU</mat-option>
+                      <mat-option value="innbucks">INN BUCKS</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <br>
+                  <mat-form-field appearance="standard" style="width: 80%">
+                    <mat-label>Payment Ref Code</mat-label>
+                    <input
+                      type="text"
+                      matInput
+                      placeholder="REF CODE"
+                      formControlName="refCode"
+                    />
+                  </mat-form-field>
+                  <br>
+                  <p style="color: red;">*Please Make Payment First then<br>Enter RefCode of transaction.</p>
+                  <p>Payments to be made to 0771234568</p>
+                  <button [disabled]="!otherForm.valid" mat-button *ngIf="!SigningUp" (click)="SignUp()">SIGNUP</button>
+                  <div class="sk-chase" *ngIf="SigningUp">
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                  </div>
+                </form>
+              </mat-radio-button>
+              <mat-radio-button class="radio-button" value="payed"> 
+                <img style="width: 100%; " src="assets/alreadyPayedBTN.png" alt="PayNow Options">
+                <form [formGroup]="PayedForm" novalidate *ngIf="(SelectedPayment==='payed')">
+                  <label >Select Payment Platform <br> Where You Made Payment</label><br>
+                  <mat-form-field appearance="standard">
+                    <mat-label>Payment Platform</mat-label>
+                    <mat-select formControlName="payment">
+                      <mat-option value="ecocash">ECOCASH</mat-option>
+                      <mat-option value="oneMoney">ONEMONEY</mat-option>
+                      <mat-option value="BankTransfer">BANKTRANSFER</mat-option>
+                      <mat-option value="MasterCard">MASTERCARD</mat-option>
+                      <mat-option value="Visa">VISA</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <br>
+                  <mat-form-field appearance="standard" style="width: 80%">
+                    <mat-label>Payment Ref Code</mat-label>
+                    <input
+                      type="text"
+                      matInput
+                      placeholder="REF CODE"
+                      formControlName="refCode"
+                    />
+                  </mat-form-field>
+                  <br>
+                  <button [disabled]="!PayedForm.valid" mat-button *ngIf="!SigningUp" (click)="SignUp()">SIGNUP</button>
+                  <div class="sk-chase" *ngIf="SigningUp">
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                  </div>
+                </form>
+              </mat-radio-button>
+            </mat-radio-group>
+          </mat-step>
+        </mat-horizontal-stepper>
+        <br />
+    <br />
+    <span
+      >Already a Y.M.F member?<a (click)="changPage('login')">
+        Log In</a
+      ></span
+    >
+    <br />
+    <br />
+      </mat-tab>
+      <mat-tab label="REGISTER EXISTING">
+        <form class="formPanel animate__animated animate__fadeIn" [formGroup]="userRegForm" novalidate (submit)="Register()">
+          <h1>YMF Members Online Register</h1>
+          <mat-form-field appearance="standard" style="width: 80%">
+            <mat-label>YMF ID</mat-label>
+            <input
+              matInput
+              placeholder="Your YMF ID ex. YMF000100"
+              formControlName="ymfid"
+            />
+          </mat-form-field>
+          <p style="color: red" *ngIf="userRegForm.controls['ymfid'].invalid&&(userRegForm.controls['ymfid'].dirty||userRegForm.controls['ymfid'].touched)">
+            Please Enter A Valid YMF ID
+          </p>
+          <br>
+          <img class="idPicUploadPreview" *ngIf="imageSrc" [src]="imageSrc" alt="">
+          <br>
+          <br>
+          <input
+            id="input-file-id" hidden
+            type="file"
+            formControlName="idPic" 
+            (change)="onFileChange($event)"/>
+          <label for="input-file-id" class="IdPicUpload">Upload ID Picture</label>
+          <br>
+          <br>
+          <label>  {{getFileName()}}</label>
+          <br>
+          <p style="color: red" *ngIf="userRegForm.controls['idPic'].invalid&&(userRegForm.controls['idPic'].touched)">
+            PLEASE UPLOAD A PICTURE OF YOUR NATIONAL ID
+          </p>
+          <mat-form-field appearance="standard" style="width: 80%">
+            <mat-label>Email </mat-label>
+            <input
+              matInput
+              placeholder="Email@email.com"
+              formControlName="email"
+            />
+          </mat-form-field>
+          <p style="color: red" *ngIf="userRegForm.controls['email'].invalid&&(userRegForm.controls['email'].dirty||userRegForm.controls['email'].touched)">Please Enter A valid Email</p>
+          <mat-form-field appearance="standard" style="width: 80%">
+            <mat-label>Password</mat-label>
+            <input
+              type="password"
+              matInput
+              placeholder="Password"
+              formControlName="password"
+            />
+          </mat-form-field>
+          <p style="color: red" *ngIf="userRegForm.controls['password'].invalid&&(userRegForm.controls['password'].dirty||userRegForm.controls['password'].touched)">
+            Enter a valid password with a minimum of 8 characters
+          </p>
+          <p style="color: red" *ngIf="userRegForm.controls['passwordConfirm'].invalid&&(userRegForm.controls['passwordConfirm'].dirty||userRegForm.controls['passwordConfirm'].touched)">
+            Password Do Not Match
+          </p>
+          <mat-form-field appearance="standard" style="width: 80%">
+            <mat-label>Cornfirm Password</mat-label>
+            <input
+              type="password"
+              matInput
+              placeholder="Cornfirm Password"
+              formControlName="passwordConfirm"
+            />
+          </mat-form-field>
+          <p style="color: red" *ngIf="userRegForm.controls['passwordConfirm'].invalid&&(userRegForm.controls['passwordConfirm'].dirty||userRegForm.controls['passwordConfirm'].touched)">
+            Password Do Not Match
+          </p>
+          <br>
+          <button mat-raised-button  *ngIf="!SigningUp" type="submit">
+            Register
+          </button>
+          <div class="sk-chase" *ngIf="SigningUp">
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+            <div class="sk-chase-dot"></div>
+          </div>
+        </form>
+        <br />
+    <br />
+    <span
+      >Already a Y.M.F member?<a (click)="changPage('login')">
+        Log In</a
+      ></span
+    >
+    <br />
+    <br />
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</section>

@@ -1,0 +1,12 @@
+<h3 mat-dialog-title>VERIFY YMF MEMBER</h3>
+<div mat-dialog-content class="detail">
+    <div><span ><b>NAME:</b> {{data.user.userName}} {{data.userSurname}}</span></div>
+    <div><span><b>YMF ID:</b> {{data.user.YMFID}}</span></div>
+    <div><span><b>NATIONAL ID:</b> {{data.user.IDNumber}}</span></div>
+    <p>NATIONAL ID FOR VERIFICATION</p>
+    <img [src]="getImageURL(data.user.NationalIDPIC)" alt="NATIONAL ID PICTURE">
+</div>
+<div mat-dialog-actions>
+  <button class="agree" mat-button mat-dialog-close  (click)="ApproveUser(data.user.id)">Verify</button>
+  <button class="decline" mat-button mat-dialog-close (click)="DeclineUser()" cdkFocusInitial>Cancel</button>
+</div>

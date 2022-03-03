@@ -1,0 +1,85 @@
+<div class="mainView">
+  <div class="NavPanel">
+   <div class='panel {{getSelectedState("prof")}}'  routerLink="/member/loggedIn/home">
+    <i class="fas fa-home"></i><br>
+    HOME
+   </div>
+   <div class="breakline"></div>
+  <div class='panel gc {{getSelectedState("set")}}'  routerLink="/member/loggedIn/settings">
+    <i class="fas fa-user-cog"></i><br>
+    SETTINGS
+  </div>
+  <div class="breakline"></div>
+  <div class='panel gc {{getSelectedState("users")}}' routerLink="/member/loggedIn/admin/members">
+    <i class="fas fa-users"></i><br>
+    MANAGE MEMBERS
+  </div>
+  <div class="breakline"></div>
+  <div class='panel gc {{getSelectedState("finance")}}' routerLink="/member/loggedIn/admin/finance">
+    <i class="fas fa-file-invoice-dollar"></i><br>
+    FINANCES
+  </div>
+  <div class="breakline"></div>
+  <div class='panel gc {{getSelectedState("blog")}}'  routerLink="/member/loggedIn/blog">
+    <i class="fas fa-edit"></i><br>
+    UPLOAD ARTICLE
+  </div>
+  <div class="breakline"></div>
+  <div class='panel gc {{getSelectedState("blogeditor")}}'routerLink="/member/loggedIn/admin/blog">
+    <i class="fas fa-newspaper"></i><br>
+    PUBLICATIONS
+  </div>
+  <div class="breakline"></div>
+  <div class="panel" (click)="logOut()">
+    <i class="fas fa-sign-out-alt"></i><br>
+    LOG OUT
+  </div>
+  <div class="breakline"></div>
+  </div>
+  <div class="notsMobile" (click)="showMobileNots()" [matBadge]="UserNotifications.length">
+    <i class="fas fa-bell"></i>
+    <div class="notPanelMobile animate__animated animate__fadeIn" *ngIf="ShowMobileNots">
+      <h4>NOTIFICATIONS <i class="fas fa-bell"></i></h4>
+      <div class="notification" *ngFor="let item of UserNotifications">
+        <h5>{{item.NotHeader}}</h5>
+        <p>{{item.NotContent}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="MainPanel">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="InfoPanel" *ngIf="IfHome()">
+    <div class="notifications animate__animated animate__fadeInRight">
+      <h4>NOTIFICATIONS <i class="fas fa-bell"></i></h4>
+      <div class="notification" *ngFor="let item of UserNotifications">
+        <h5>{{item.NotHeader}}</h5>
+        <p>{{item.NotContent}}</p>
+      </div>
+    </div>
+    <div class="calendar animate__animated animate__fadeInRightBig">
+      <h3>YMF CALENDAR OF EVENTS</h3>
+      <h4>{{Calender.month}} {{Calender.year}}</h4>
+      <div class="Days">
+        <div class="calendarSlot">Sun</div>
+        <div class="calendarSlot">Mon</div>
+        <div class="calendarSlot">Tue</div>
+        <div class="calendarSlot">Wed</div>
+        <div class="calendarSlot">Thu</div>
+        <div class="calendarSlot">Fri</div>
+        <div class="calendarSlot">Sat</div>
+      </div>
+      <div class="Dates" *ngFor="let weeks of Calender.calendar">
+      <div class="calendarSlot {{checkCalenderDateVisibility(days)}}"*ngFor="let days of weeks">{{days}}</div>
+      </div>
+    </div>
+    <div class="payments animate__animated animate__fadeIn" >
+      <h4>SUBSCRIPTIONS PAYMENTS <i class="fas fa-money-bill-alt"></i></h4>
+      <div class="paymentOptions">
+        <button mat-raised-button>
+          <img src="assets/button_pay-now_large.svg" alt="">
+        </button>
+      </div>
+  </div>
+
+</div>

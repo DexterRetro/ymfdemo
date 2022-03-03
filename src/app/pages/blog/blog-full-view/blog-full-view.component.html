@@ -1,0 +1,67 @@
+<div class="Main" *ngIf="blog">
+    <div class="Header" >
+    <img [src]="getImage(blog.blogPicture)" alt="" class="animate__animated animate__fadeIn">
+    <div class="headers animate__animated animate__zoomIn">
+        <h1>{{blog.Topic}}</h1>
+        <h3>{{blog.Summary}}</h3>
+    </div>
+   
+     <div class="info animate__animated animate__fadeInLeft">
+        <h4><i class="fas fa-user-edit"></i>By {{blog.Author}} <br><i class="fas fa-calendar"> 12/02/22</i></h4>
+     </div>
+    </div>
+    <div class="ads_strip">
+        <img src="assets/ymftopAd.png" alt="">
+    </div>
+    <div class="Content animate__animated animate__fadeInUp">
+        <div class="paragraph" *ngFor="let para of blog.Content;let i = index">
+            <p>{{para.paragraph}}</p>
+            <div class="images" *ngIf="para.PImage.ImbededImg">
+                <div class="image">
+                    <img [src]="getImage(para.PImage.ImbededImg)" alt="">
+                    <i>{{para.PImage.caption}}</i>
+               </div>
+            </div>
+            <div class="ads_rec"  *ngIf="!para.PImage.ImbededImg">
+                <img src="assets/ymfblogAd.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="Comments animate__animated animate__fadeIn">
+        <div class="commentlist">
+            <h3>Thoughts on {{blog.Topic}}</h3>
+            <div class="commentCard" *ngFor="let com of blog.Comments">
+                <div class="info">
+                    <h3 class="username">{{com.commentor}}</h3>
+                    <i>{{getFormatedDate(com.commentedOn)}}</i>
+                </div>
+                <p>{{com.Comment}}</p>
+            </div>
+        </div>
+        <form class="inputForm" *ngIf="commentForm" [formGroup]="commentForm" novalidate>
+            <h3>Leave a comment</h3>
+            <mat-form-field class="nameInput" appearance="fill">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Fill In Name" formControlName="name">
+            </mat-form-field>
+          <div *ngIf="commentForm.controls['name'].invalid&&(commentForm.controls['name'].dirty||commentForm.controls['name'].touched)" class="warn">Name Required!</div>
+            <mat-form-field class="Comment" appearance="fill">
+              <mat-label>Leave a comment</mat-label>
+              <textarea matInput placeholder="Place Comment here ....." formControlName="comment"></textarea>
+            </mat-form-field>
+            <div class="warn"  *ngIf="commentForm.controls['comment'].invalid&&(commentForm.controls['comment'].dirty||commentForm.controls['comment'].touched)">A comment is required!</div>
+            <button type="submit" (click)="commentOnBlog()"
+            [disabled]="commentForm.pristine || commentForm.invalid"mat-raised-button >Comment</button>
+           <div class="share">
+               <label >Share On</label>
+               <a href="#"><span class="fab fa-facebook-f"></span></a>
+               <a href="#"><span class="fab fa-twitter"></span></a>
+               <a href="#"><span class="fab fa-instagram"></span></a>
+               <a href="#"><span class="fab fa-whatsapp"></span></a>
+           </div>
+           <div class="adsSquare">
+               <img src="assets/ymfsquareAd.png" alt="ad">
+           </div>
+        </form>
+    </div>
+</div>

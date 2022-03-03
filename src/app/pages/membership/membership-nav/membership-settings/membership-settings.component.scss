@@ -1,0 +1,30 @@
+.main{
+
+  text-align: center;
+  i{
+    font-size: 20px;
+    text-align: center;
+  }
+}
+.IdPicUpload{
+    background-color: #ffcd04;
+    border-radius: 10px;
+    padding: 5px;
+    color: white;
+    box-shadow: 0 4px 8px 0 rgba($color: #000000, $alpha: 0.3);
+}
+button{
+      width: 40%;
+      height: 25px;
+      margin: auto;
+      border: 5%;
+      border-radius: 10px;
+      background-color:#ffcd04 ;
+      color: white;
+      font-size: 16px;
+}
+@media screen and(max-width:960px) {
+  .main{
+    height: 800px;
+  }
+}

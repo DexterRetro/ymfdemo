@@ -1,0 +1,50 @@
+<h1>Membership Profile</h1>
+<div class="card animate__animated animate__fadeIn"  [style.background-image]="'url(assets/ymfTrans_LO.png)'">
+  <div class="profPic animate__animated animate__fadeInBig">
+    <img [src]="getProfilePic(user.ProfilePhoto)" alt="Profile Pic">
+  </div>
+  <div class="infoBlock">
+   <h3 class="headers"><b>YMF ID : </b></h3>
+   <p class="info">{{user.YMFID}}</p>
+  </div>
+  <div class="infoBlock gc">
+   <h4 class="headers">First Name(s) : </h4>
+   <p class="info">{{user.userName}}</p>
+  </div>
+   <div class="infoBlock">
+     <h4 class="headers">Surname : </h4>
+   <p class="info">{{user.userSurname}}</p>
+   </div>
+   <div class="infoBlock">
+     <h4 class="headers">National ID number : </h4>
+     <p class="info">{{user.IDNumber}}</p>
+   </div>
+   <div class="infoBlock">
+     <h4 class="headers">Province : </h4>
+   <p class="info">{{user.Province}}</p>
+   </div>
+   <div class="infoBlock">
+     <h4 class="headers">Email : </h4>
+     <p class="info">{{user.email}}</p>
+   </div>
+   <div class="infoBlock">
+     <h4 class="headers">Phone Number : </h4>
+   <p class="info">{{user.phoneNumber}}</p>
+   </div>
+</div>
+<div class="memberStatus animate__animated animate__fadeIn">
+  <div class="status animate__animated animate__zoomIn">
+    <h4>MEMBERSHIP STATUS: </h4>
+    <p>{{getMembershipvalidity()}}</p>
+  </div>
+  <div class="border"></div>
+  <div class="status animate__animated animate__zoomIn">
+    <h4>MEMBERSHIP SUBSCRIPTION DATE: </h4>
+    <p>{{getFormatedDate(user.MembershipSubscriptionDate)}}</p>
+  </div>
+  <div class="border"></div>
+  <div class="status animate__animated animate__zoomIn">
+    <h4>SUBSCRIPTION EXPIRERY DATE: </h4>
+    <p>{{getFormatedDate(user.MembershipExpireryDate)}}</p>
+  </div>
+</div>

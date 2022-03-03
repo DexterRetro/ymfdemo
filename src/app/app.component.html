@@ -1,0 +1,118 @@
+<div class="sidemenu  animate__animated animate__fadeInLeft animate__faster" *ngIf="smallScreenState" >
+  <h4>MENU</h4>
+  <div class="brd"></div>
+  <a href="#" class="home" routerLink="/home">HOME</a>
+  <div class="brd"></div>
+  <a href="#" class="blog" routerLink="/blog">BLOG</a>
+  <div class="brd"></div>
+  <a href="#" class="membership" routerLink="/member">MEMBERSHIP</a>
+  <div class="brd"></div>
+  <div class="membershipOptions" *ngIf="IsLoggedIn()">
+    <a href="#" class="membership" routerLink="/member/loggedIn/home">HOME <i class="fas fa-home"></i></a>
+    <div class="brdMemb"></div>
+    <a href="#" class="membership" routerLink="/member/loggedIn/settings">SETTINGS <i class="fas fa-user-cog"></i></a>
+    <div class="brdMemb"></div>
+    <a href="#" class="membership" routerLink="/member/loggedIn/admin/members">MANAGE MEMBERS <i class="fas fa-users"></i></a>
+    <div class="brdMemb"></div>
+    <a href="#" class="membership" routerLink="/member/loggedIn/admin/finance">FINANCES <i class="fas fa-file-invoice-dollar"></i></a>
+    <div class="brdMemb"></div>
+    <a href="#" class="membership" routerLink="/member/loggedIn/blog">UPLOAD ARTICLES <i class="fas fa-edit"></i></a>
+    <div class="brdMemb"></div>
+    <a href="#" class="membership" routerLink="/member/loggedIn/admin/blog">PUBLICATIONS <i class="fas fa-newspaper"></i></a>
+    <div class="brdMemb"></div>
+    <a href="#" class="membership" (click)="logOut()">LOG OUT <i class="fas fa-sign-out-alt"></i></a>
+    <div class="brdMemb"></div>
+  </div>
+ 
+</div>
+<div class="header-top animate__animated animate__fadeInDownBig">
+  <div class="logo">
+    <img src="assets/ymfIcon.png" />
+    <div>
+      <h3>Young Miners</h3>
+      <p>Foundation</p>
+    </div>
+  </div>
+  <ul class="header-links-big">
+    <li class="Home">
+      <a href="#" class="home" routerLink="/home">HOME</a>
+    </li>
+    <li class="Blog">
+      <a href="#" class="blog" routerLink="/blog">BLOG</a>
+    </li>
+    <li>
+      <a href="#" class="membership" routerLink="/member">MEMBERSHIP</a>
+    </li>
+  </ul>
+    
+  <div [class]="'humburger'+' '+getCancelActions('hum')" (click)="ToggleMenu()">
+    <div [class]="'lines'+' '+getCancelActions('top')"></div>
+    <div [class]="'lines' +' '+getCancelActions('mid')"></div>
+    <div [class]="'lines'  +' '+getCancelActions('bottom')"></div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+<footer>
+  <div class="main-content">
+    <div class="left box">
+      <h2>Find Us On</h2>
+      <div class="social">
+        <a href="#"><span class="fab fa-facebook-f"></span></a>
+        <a href="#"><span class="fab fa-twitter"></span></a>
+        <a href="#"><span class="fab fa-instagram"></span></a>
+        <a href="#"><span class="fab fa-whatsapp"></span></a>
+      </div>
+      <h2>Sponsors and Partners</h2>
+      <div class="sponsors">
+        <img *ngFor="let image of Images; let i = index" [src]="image" alt="" />
+      </div>
+    </div>
+    <div class="center box">
+      <h2>Address</h2>
+      <div class="content">
+        <div class="place">
+          <span class="fas fa-map-marker-alt"></span>
+          <div class="text">40 Toynbee Avenue Paddonhurst Bulawayo</div>
+        </div>
+        <div class="phone">
+          <span class="fas fa-phone-alt"></span>
+          <div class="text">+263 773 625 406 </div>
+        </div>
+        <div class="email">
+          <span class="fas fa-envelope"></span>
+          <div class="text">youngminers@gmail.com</div>
+        </div>
+      </div>
+    </div>
+    <div class="right box">
+      <h2>Contact Us</h2>
+      <div class="content">
+        <form action="#">
+          <div class="email">
+            <div class="text">Email *</div>
+            <input type="email" style="color: white" required />
+          </div>
+          <div class="msg">
+            <div class="text">Message *</div>
+            <textarea
+              rows="2"
+              cols="25"
+              required
+              style="color: white"
+            ></textarea>
+          </div>
+          <div class="btn">
+            <button type="submit">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <span class="credit">
+      created by<a href="#"> DexterRetro </a> @brohalla | &copy;<span>
+        {{ Year }} All rights reserved</span
+      >
+    </span>
+  </div>
+</footer>

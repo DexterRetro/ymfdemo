@@ -1,0 +1,25 @@
+
+.agree,.decline{
+    width: 80%;
+    margin: auto;
+    margin-bottom: 10px;
+    color: white;
+    border: none;
+    margin-left: 10%;
+    height: 20px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.agree{
+    background-color: green;
+}
+.decline{
+    background-color: red;
+}
+
+.detail{
+    margin: auto;
+    font-size: 15px;
+    text-align: justify;
+    margin-bottom: 10px;
+}

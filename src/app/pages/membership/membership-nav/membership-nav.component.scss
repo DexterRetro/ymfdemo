@@ -1,0 +1,274 @@
+.mainView{
+  min-height: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3,10% 60% 25%);
+  padding-top: 4%;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  .NavPanel{
+    padding-top: 40px;
+    .panel{
+      width: 100%;
+      height: auto;
+      text-align: center;
+      color: black;
+      font-size: 12px;
+      i{
+        padding: 0;
+        padding-top: 7%;
+        margin: auto;
+        font-size: 30px;
+      }
+    }
+    .breakline{
+      height: 2px;
+      width: 100%;
+      background-color: grey;
+    }
+    .gc{
+      background-color: whitesmoke;
+    }
+    .selected{
+      color: white;
+      background-color: #ffcd04;
+      box-shadow: 0 4px 8px 0 rgba($color: #000000, $alpha: 0.2);
+    }
+    .panel:hover{
+
+      cursor: pointer;
+      box-shadow: 0 4px 8px 0 rgba($color: #000000, $alpha: 0.1);
+      background-color: #fae17f;
+      color: rgb(41, 41, 41);
+      margin-bottom: auto;
+      i{
+        font-size: 40px;
+      }
+    }
+    .rc{
+      background-color: red;
+      color: white;
+    }
+  }
+  .MainPanel{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+  }
+  
+  .notsMobile{
+    .mat-badge-content.mat-badge-active{
+      background: #e9bb04;
+      color: white;
+    }
+    display: none;
+    width: 50px;
+    height: 50px;
+    background-color: #ffcd04;
+    box-shadow: 0 4px 8px 0 rgba($color: #000000, $alpha: 0.2);
+    border-radius: 25px;
+    text-align: center;
+    font-size: 30px;
+    bottom: 50px;
+    right: 40px;
+    z-index: 100;
+    position: fixed;
+    cursor: pointer;
+    color: white;
+    .notPanelMobile{
+      position: absolute;
+        bottom: 50px;
+        right: 5%;
+        width: 180px;
+        min-height:250px;
+        background-color: #ffcd04;
+        box-shadow: 0 4px 8px 0 rgba($color: #000000, $alpha: 0.1);
+        .notification{
+          color: white;
+          border: 1px solid white;
+          margin: auto;
+          margin-top: 2%;
+          width: 95%;
+          h5{
+            text-align: justify;
+            font-weight: bold;
+            font-size: 12px;
+            margin: 0;
+          }
+          p{
+            font-size: 12px;
+            margin: 0;
+          }
+        }
+        h4{
+          background-color: whitesmoke;
+          margin-left: auto;
+          margin-right: auto;
+          font-size: 15px;
+          color: #000000;
+        }
+        .gc{
+          background-color: transparent;
+        }
+    }
+  }
+  .InfoPanel{
+   overflow: hidden;
+   .notifications{
+     height: 25%;
+     width:95%;
+     margin: auto;
+     margin-bottom: 2%;
+     text-align: center;
+     h4{
+       width: 90%;
+       background-color: whitesmoke;
+       margin-left: auto;
+       margin-right: auto;
+     }
+     .notification{
+
+       h5{
+         text-align: justify;
+         font-weight: bold;
+         font-size: 12px;
+         margin: 0;
+       }
+       p{
+         font-size: 12px;
+         margin: 0;
+       }
+     }
+     .gc{
+       background-color: whitesmoke;
+     }
+   }
+   .calendar{
+    box-shadow: 0 4px 8px 0 rgba($color: #000000, $alpha: 0.3);
+     height: 40%;
+     background-color: #ffcd04;
+     margin:0;
+     margin-bottom: 2%;
+     padding-left: 5%;
+     border-radius: 20px;
+     color: white;
+     overflow: hidden;
+     h3{
+       margin-bottom: 0;
+     }
+     h4{
+       margin: 0;
+       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+       font-weight: bold;
+       width: 50%;
+       margin: auto;
+       text-align: center;
+     }
+     .Days{
+       width: 95%;
+       height: 20px;
+       text-align: center;
+       display: grid;
+       grid-template-columns: repeat(7,14%);
+       .calendarSlot{
+        color: white;
+        font-weight: bolder;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+       }
+     }
+     .Dates{
+      width: 95%;
+      text-align: center;
+      display: grid;
+      grid-template-columns: repeat(7,14%);
+     }
+     .calendarSlot{
+      color: white;
+      font-weight: lighter;
+     }
+     .hideCalenderSlot{
+      color:transparent;
+     }
+
+   }
+   .payments{
+     height: 40%;
+     text-align: center;
+     h4{
+      width: 90%;
+      background-color: whitesmoke;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+     }
+     p{
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+     }
+
+     .paymentOptions{
+       width: 80%;
+       margin: auto;
+       margin-bottom: 5px;
+       border-radius: 10px;
+       img{
+         width: 100%;
+         object-fit: cover;
+         object-position: center;
+       }
+     }
+   }
+  }
+}
+
+@media screen and(max-width:780px) {
+  .mainView{
+    display: block;
+    height: 1200px;
+    padding-top: 50px;
+    .NavPanel{
+      padding-top: 2px;
+      display: none;
+      grid-template-columns: repeat(3,33%);
+      box-shadow: 0 4px 8px 0 rgba($color: #000000, $alpha: 0.1);
+      width: 90%;
+      margin: auto;
+      .breakline{
+        display: none;
+      }
+    }
+    .MainPanel{
+      width: 100%;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+    .notsMobile{
+      display: block;
+    }
+
+    .InfoPanel{
+
+      .notifications{
+        display: none;
+      }
+      .calendar{
+        display: none;
+      }
+      .payments{
+        .paymentOptions{
+          margin-bottom: 10px;
+          img{
+            width: 90%;
+
+          }
+        }
+      }
+
+    }
+  }
+
+
+}

@@ -1,0 +1,28 @@
+<div class="main">
+  <div *ngIf="aboutInfo">
+    <div *ngFor="let abt of aboutInfo.Info">
+      <header>
+        <h1>{{ abt.SubHeader }}</h1>
+      </header>
+      <div class="display {{ toPutGrid() }}">
+        <div class="{{ animationBody() }}">
+          <header>
+            <h2 class="para">{{ abt.SubParagraph }}</h2>
+          </header>
+          <div *ngFor="let item of abt.SubInfo; let i = index">
+            <h3>{{ item.Header }}</h3>
+            <p class="para" *ngFor="let paragraphs of item.Info">
+              {{ paragraphs }}
+            </p>
+          </div>
+        </div>
+        <div
+          class="imbedLogo animate__animated animate__fadeInRight"
+          *ngIf="aboutInfo.InbedLogo"
+        >
+          <img src="assets/ymfTransAlt.png" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,142 @@
+<header>
+  <div class="shadow"></div>
+  <img
+    src="assets/ymfTrans.png"
+    #translate
+    class="YMFLOGO translate noMobile animate__animated animate__fadeInUp"
+    data-speed="0.2"
+    alt=""
+  />
+  <img
+    src="assets/MobileBackGround.jpg"
+    #translate
+    class="PcBg translate noMobile animate__animated animate__fadeIn"
+    data-speed="-0.25"
+    alt=""
+  />
+  <img
+    src="assets/MobileBackGround.jpg"
+    class="mobileBg animate__animated animate__fadeIn"
+    alt="mobileBg"
+  />
+</header>
+<section class="about">
+  <div class="shadowScrow"></div>
+  <div class="container">
+    <div class="content">
+      <h3 class="title">
+        Our Vision
+        <div class="border" style="height:7px;width: 130px;"></div>
+      </h3>
+      <p class="text">
+        The Foundation envisions a society where young people are involved in
+        their own development and that of their communities.
+        <br />
+        <br />
+      </p>
+      <h4 class="title">
+        Our Mission
+        <div class="border" style="height:7px;width: 150px;"></div>
+      </h4>
+      <p>
+        To assist, represent, coordinate and network Zimbabwean youths in
+        mining.
+        <br />
+        <br />
+      </p>
+      <h4 class="title">
+        What We Value
+        <div class="border" style="height:7px;width: 180px;"></div>
+      </h4>
+      <p>
+        <br />
+        <i style="color: white;">• </i>Teamwork
+        <br />
+        <i style="color: white;">• </i>Integrity
+        <br />
+        <i style="color: white;">• </i>Empowerment
+        <br />
+        <i style="color: white;">• </i>Accountability
+        <br />
+        <i style="color: white;">• </i>Transparency
+        <br />
+        <i style="color: white;">• </i>Innovation
+      </p>
+    </div>
+    <div class="imgContainer">
+      <img src="assets/ymflogo.jpg" alt="" />
+    </div>
+  </div>
+</section>
+<div class="ads">
+   <img src="assets/ymftopAd.png" alt="ad">
+</div>
+<div class="sk-cube-grid" *ngIf="showLoader">
+  <div class="sk-cube sk-cube1"></div>
+  <div class="sk-cube sk-cube2"></div>
+  <div class="sk-cube sk-cube3"></div>
+  <div class="sk-cube sk-cube4"></div>
+  <div class="sk-cube sk-cube5"></div>
+  <div class="sk-cube sk-cube6"></div>
+  <div class="sk-cube sk-cube7"></div>
+  <div class="sk-cube sk-cube8"></div>
+  <div class="sk-cube sk-cube9"></div>
+</div>
+<section class="Featured"  *ngIf="blogs.length>1">
+  <div class="fleft"[routerLink]="'/blog/'+blogs[0]._id">
+    <div class="featureTag">Featured</div>
+    <img [src]="getImageUrl(blogs[0].blogPicture)" alt="">
+    <div class="info animate__animated animate__fadeIn">
+      <h2>{{blogs[0].Topic}}</h2>
+      <div class="details">
+        <h4><i class="far fa-edit"></i> {{blogs[0].Author}} <br> <i class="far fa-comment-alt"></i>  {{getCommentCount(0)}}</h4>
+      </div>
+      <p>{{blogs[0].Summary}}</p>
+    </div>
+  </div>
+  <div class="fright">
+    <div class="rtop" [routerLink]="'/blog/'+blogs[1]._id">
+      <div class="featureTag">Featured</div>
+      <img [src]="getImageUrl(blogs[1].blogPicture)" alt="">
+      <div class="info animate__animated animate__fadeIn">
+        <h2>{{blogs[1].Topic}}</h2>
+        <div class="details">
+          <h4><i class="far fa-edit"></i> {{blogs[1].Author}} <br> <i class="far fa-comment-alt"></i>  {{getCommentCount(1)}}</h4>
+        </div>
+        <p>{{blogs[1].Summary}}</p>
+      </div>
+    </div>
+    <div class="rbottom">
+      <div class="rbl" [routerLink]="'/blog/'+blogs[2]._id">
+        <img [src]="getImageUrl(blogs[2].blogPicture)" alt="">
+        <div class="info animate__animated animate__fadeIn">
+          <h2>{{blogs[2].Topic}}</h2>
+          <p>{{blogs[2].Summary}}</p>
+        </div>
+      </div>
+      <div class="rbr" [routerLink]="'/blog/'+blogs[3]._id">
+        <img [src]="getImageUrl(blogs[3].blogPicture)" alt="">
+        <div class="info animate__animated animate__fadeIn">
+          <h2>{{blogs[2].Topic}}</h2>
+          <p>{{blogs[2].Summary}}</p>
+        </div>
+      </div>
+    </div>
+    <div></div>
+  </div>
+</section>
+<div class="Main">
+  <h1 class="animate__animated animate__fadeInDown">About YMF</h1>
+  <div class="cards">
+    <div
+      class="card animate__animated animate__fadeInUp"
+      *ngFor="let abt of aboutData; let i = index"
+      (click)="aboutFullView(abt.MainHeader)"
+    >
+      <i class="fas fa-{{ abt.Icon }} fa-10x"></i>
+      <div class="container animate__animated animate__zoomIn">
+        <h2>{{ abt.MainHeader }}</h2>
+      </div>
+    </div>
+  </div>
+</div>

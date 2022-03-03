@@ -1,0 +1,36 @@
+.main {
+  min-height: 100vh;
+  padding-top: 10%;
+  color: black;
+  text-align: center;
+  margin-bottom: 1%;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: auto;
+  grid-gap: 1rem;
+  height: auto;
+}
+.imbedLogo {
+  max-width: 400px;
+}
+.para {
+  max-width: 70%;
+  margin-left: 15%;
+  text-align: justify;
+}
+
+@media screen and (max-width: 900px) {
+  .grid {
+    display: block;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .imbedLogo {
+    display: none;
+  }
+  .para {
+    max-width: 90%;
+    margin-left: 5%;
+  }
+}

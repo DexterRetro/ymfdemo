@@ -1,0 +1,39 @@
+<section>
+  <div class="left">
+    <div class="content">
+      <img
+        class="animate__animated animate__fadeIn"
+        src="assets/ymfTransAlt.png"
+        alt=""
+      />
+      <p class="animate__animated animate__fadeInUp">
+        To assist, represent, coordinate and/or network Zimbabwean youths in
+        mining.
+      </p>
+    </div>
+  </div>
+  <div class="right">
+    <div class="formPanel animate__animated animate__fadeIn" *ngIf="(PaymentUrl!=='pendingAproval')">
+      <img class="Icon" src="assets/ymfTransAlt.png" alt="" />
+      <div class="sk-chase"*ngIf="attempts>0" >
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+      </div>
+      <h3 *ngIf="attempts>0">Checking payment Status...</h3>
+      <h3 *ngIf="attempts<1">Payment Status Check Status.Timed Out!</h3>
+      <p>if not automatically redirected to payment page <a [href]="PaymentUrl" (click)="navigateToExternal()">click here!</a></p>
+      <p *ngIf="attempts<1">If Completed Payment <a (click)=" restartCheck()"> Click Here </a> To Recheck</p>
+    </div>
+    <div style="text-align: center; padding-top: 100px;" *ngIf="(PaymentUrl==='pendingAproval')">
+      <img style="height: 100px; width: 100px;" class="Icon" src="assets/ymfTransAlt.png" alt="" />
+      <h3>Successfuly Applied for YMF Registration</h3>
+      <p><b>Membership status:</b> Awaiting Approval</p>
+      <p>We will contact you via the email you gave us or via SMS/WhatsApp using the phone number you gave us, Once verification is Complete.</p>
+    </div>
+  </div>
+  <div class="divider"></div>
+</section>

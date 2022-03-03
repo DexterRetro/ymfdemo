@@ -1,0 +1,50 @@
+<h2>SETTINGS</h2>
+<div class="main">
+  <form [formGroup]="UserForm">
+    <h3>Change Profile Photo</h3>
+    <br>
+        <img style="width: 150px; height: 150px;" class="idPicUploadPreview" *ngIf="imageSrc" [src]="imageSrc" alt="">
+        <br>
+        <br>
+        <input
+            id="input-file-id" hidden
+            type="file"
+            (change)="onFileChange($event)"/>
+          <label for="input-file-id" class="IdPicUpload">Upload Picture</label>
+          <br>
+          <br>
+    <h3>Change Password</h3>
+    <mat-form-field appearance="standard" style="width: 80%">
+      <mat-label>New Password</mat-label>
+      <input
+        type="password"
+        matInput
+        placeholder="New Password"
+        formControlName="password"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="standard" style="width: 80%">
+      <mat-label>Cornfirm New Password</mat-label>
+      <input
+        type="password"
+        matInput
+        placeholder="Confirm Password"
+        formControlName="passwordConfirm"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="standard" style="width: 80%">
+      <mat-label>Old Password</mat-label>
+      <input
+        type="password"
+        matInput
+        placeholder="Old Password"
+        formControlName="oldPassword"
+      />
+    </mat-form-field>
+    <br>
+    <button>Update</button>
+  </form>
+  
+  
+
+</div>

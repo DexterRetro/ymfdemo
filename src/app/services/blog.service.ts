@@ -1,0 +1,74 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { BlogPost } from '../models/blog-post';
+import { UnverifiedBlog } from '../models/unverifiedBlog';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class BlogService {
+
+  constructor(private http:HttpClient) {   }
+
+  async GetBlogs ():Promise<Observable<{message:String,Blogs:BlogPost[]}>>{
+    const Blogs = await this.http.get<{message:String,Blogs:BlogPost[]}>(`${environment.backendAPIURL}/blog`);
+    return Blogs;
+  } 
+  async GetUnverifiedBlogs ():Promise<Observable<{message:String,Blogs:UnverifiedBlog[]}>>{
+    const Blogs = await this.http.get<{message:String,Blogs:UnverifiedBlog[]}>(`${environment.backendAPIURL}/blog/unverified`);
+    return Blogs;
+  } 
+  async AproveUnverifiedBlogs (id:any):Promise<Observable<{message:String}>>{
+    const Blogs = await this.http.post<{message:String}>(`${environment.backendAPIURL}/blog/unverified`,id);
+    return Blogs;
+  } 
+  getImageURL(imageName:any){
+    return `${environment.backendRoot}pictures/${imageName}`;
+  }
+  
+  async UploadBlog(blog:BlogPost,CoverPhoto:any,ImbededImages:[{Image:String,ImageFile:any,index:Number}],captions:[String]):Promise<Observable<{message:String,Blog:BlogPost}>>{
+    blog.blogPicture=CoverPhoto;
+    for (let index = 0; index < ImbededImages.length; index++) {
+      blog.Content[index].PImage={ImbededImg:ImbededImages[index].Image,caption:captions[index]}
+    }
+    let params = new HttpParams();
+
+    const options = {
+      params: params,
+      reportProgress: true,
+    };
+    const Blog = await this.http.post<{message:String,Blog:BlogPost}>(`${environment.backendAPIURL}/blog`,blog,options);
+    return Blog;
+  }
+  async UploadWordDOcument(wordDocument:any):Promise<Observable<{message:String,Blog:BlogPost}>>{
+    let formData = new FormData();
+    formData.append('upload', wordDocument,);
+
+    let params = new HttpParams();
+
+    const options = {
+      params: params,
+      reportProgress: true,
+    };
+    const Blog = await this.http.post<{message:String,Blog:BlogPost}>(`${environment.backendAPIURL}/blog/word`,formData,options);
+    return Blog;
+  }
+
+  async UpdateBlog(id:any,blog:any):Promise<Observable<{message:String,Blog:BlogPost}>>{
+    const Blog = await this.http.post<{message:String,Blog:BlogPost}>(`${environment.backendAPIURL}/blog/update`,{id,blog});
+    return Blog;
+  }
+
+  async CommentOnBlog(id:any,comment:any):Promise<Observable<{message:String,Blog:BlogPost}>>{
+    const CommentedBlog = await await this.http.post<{message:String,Blog:BlogPost}>(`${environment.backendAPIURL}/blog/update`,{id,comment});
+  return CommentedBlog;
+  }
+
+  async DeleteBlog(id:any){
+    const Blog = await this.http.delete(`${environment.backendAPIURL}/blog`,id);
+    return Blog;
+  }
+
+}

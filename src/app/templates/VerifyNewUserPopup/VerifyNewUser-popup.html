@@ -1,0 +1,10 @@
+<h3 mat-dialog-title>REGISTER NEW YMF MEMBER</h3>
+<div mat-dialog-content class="detail">
+    <div><span ><b>NAME:</b> {{data.user.userName}} {{data.userSurname}}</span></div>
+    <div><span><b>PAYMENT OPTION:</b> {{data.user.RegistrationReceipt.payementOption}}</span></div>
+    <div><span><b>REF CODE:</b> {{data.user.RegistrationReceipt.RefCode}}</span></div>
+</div>
+<div mat-dialog-actions>
+  <button class="agree" mat-button mat-dialog-close  (click)="ApproveUser(data.user.id)">Verify</button>
+  <button class="decline" mat-button mat-dialog-close (click)="DeclineUser()" cdkFocusInitial>Cancel</button>
+</div>

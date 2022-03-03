@@ -1,0 +1,69 @@
+<section>
+  <div class="left">
+    <div class="content">
+      <img
+        class="animate__animated animate__fadeIn"
+        src="assets/ymfTransAlt.png"
+        alt=""
+      />
+      <p class="animate__animated animate__fadeInUp">
+        To assist, represent, coordinate and/or network Zimbabwean youths in
+        mining.
+      </p>
+    </div>
+  </div>
+  <div class="right">
+    <form class="formPanel animate__animated animate__fadeInRight" [formGroup]="logInForm">
+      <img class="Icon" src="assets/ymfTransAlt.png" alt="" />
+      <h1>YMF Members Log In</h1>
+      <mat-form-field appearance="standard" style="width: 80%">
+        <mat-label>YMF ID or Email</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="YMF ID or Email@email.com"
+          formControlName="ymfid"
+        />
+      </mat-form-field>
+      <div style="color: red;"
+      *ngIf="logInForm.controls['ymfid'].invalid&&(logInForm.controls['ymfid'].dirty||logInForm.controls['ymfid'].touched)"
+      >Please Enter your YMF ID or Email</div>
+      <br />
+      <mat-form-field appearance="standard" style="width: 80%">
+        <mat-label>Password</mat-label>
+        <input
+          type="password"
+          matInput
+          placeholder="Password"
+          formControlName="password"
+        />
+      </mat-form-field>
+      <div style="color: red;"
+      *ngIf="logInForm.controls['password'].invalid&&(logInForm.controls['password'].dirty||logInForm.controls['password'].touched)"
+      >Please Enter your Password</div>
+      <br />
+      <button *ngIf="!loggingIn" mat-raised-button (disabled)="(!logInForm.valid)" (click)="LogIn($event)">
+        Log In
+      </button>
+      <div class="sk-chase" *ngIf="loggingIn">
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+      </div>
+      <br />
+      <br />
+      <span>Forgot Password? <a (click)="changePage('reset')">Reset</a></span>
+      <br />
+      <br />
+      <span
+        >Not a Y.M.F member?<a (click)="changePage('signup')"> Sign Up</a></span
+      >
+      <br />
+      <br />
+    </form>
+  </div>
+  <div class="divider"></div>
+</section>
