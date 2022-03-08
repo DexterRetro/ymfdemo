@@ -12,13 +12,13 @@
     <div class="brdMemb"></div>
     <a href="#" class="membership" routerLink="/member/loggedIn/settings">SETTINGS <i class="fas fa-user-cog"></i></a>
     <div class="brdMemb"></div>
-    <a href="#" class="membership" routerLink="/member/loggedIn/admin/members">MANAGE MEMBERS <i class="fas fa-users"></i></a>
+    <a href="#" class="membership {{getIfRole('mm')}}" routerLink="/member/loggedIn/admin/members">MANAGE MEMBERS <i class="fas fa-users"></i></a>
     <div class="brdMemb"></div>
-    <a href="#" class="membership" routerLink="/member/loggedIn/admin/finance">FINANCES <i class="fas fa-file-invoice-dollar"></i></a>
+    <a href="#" class="membership {{getIfRole('f')}}" routerLink="/member/loggedIn/admin/finance">FINANCES <i class="fas fa-file-invoice-dollar"></i></a>
     <div class="brdMemb"></div>
     <a href="#" class="membership" routerLink="/member/loggedIn/blog">UPLOAD ARTICLES <i class="fas fa-edit"></i></a>
     <div class="brdMemb"></div>
-    <a href="#" class="membership" routerLink="/member/loggedIn/admin/blog">PUBLICATIONS <i class="fas fa-newspaper"></i></a>
+    <a href="#" class="membership {{getIfRole('p')}}" routerLink="/member/loggedIn/admin/blog">PUBLICATIONS <i class="fas fa-newspaper"></i></a>
     <div class="brdMemb"></div>
     <a href="#" class="membership" (click)="logOut()">LOG OUT <i class="fas fa-sign-out-alt"></i></a>
     <div class="brdMemb"></div>

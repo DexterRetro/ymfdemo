@@ -1,7 +1,7 @@
 <h1>Manage Articles</h1>
 <p>Approve and Decline Articles that can be shown on the website here</p>
 <mat-form-field appearance="standard">
-    <mat-label>SEARCH MEMBER</mat-label>
+    <mat-label>SEARCH ARTICLE</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Look for specific Member" #input>
   </mat-form-field>
   
@@ -32,7 +32,7 @@
       <!-- DATE Column -->
       <ng-container matColumnDef="Upload Date">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> UPLOAD DATE </th>
-        <td mat-cell *matCellDef="let row"> {{row.CreatedOn}} </td>
+        <td mat-cell *matCellDef="let row"> {{getFormatedDate(row.CreatedOn)}} </td>
       </ng-container>
     
       <tr mat-header-row *matHeaderRowDef="Headers"></tr>

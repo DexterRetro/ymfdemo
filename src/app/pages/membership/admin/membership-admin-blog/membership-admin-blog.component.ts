@@ -3,8 +3,10 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { UnverifiedBlog } from 'src/app/models/unverifiedBlog';
 import { BlogService } from 'src/app/services/blog.service';
+import { UsersServiceService } from 'src/app/services/users-service.service';
 
 @Component({
   selector: 'app-membership-admin-blog',
@@ -39,17 +41,14 @@ export class MembershipAdminBlogComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
+  getFormatedDate(date:string):String{
+    return date.split('T')[0];
+  }
   viewUnverifiedBlog(id:any){
     const blog = this.dataSource.data.find((e:UnverifiedBlog)=>{
       return e._id===id;
     });
     if(!blog){return;}
-    const paras:String[] =[];
-    blog.Content.forEach((e:any)=>{
-      paras.push(`$<p>{e.paragraph}</p>`);
-    })
-    blog.formatedParas = paras.join('')
     this.dialog.open(Articleviewpopup,{data:blog});
 
   }
@@ -58,18 +57,36 @@ export class MembershipAdminBlogComponent implements OnInit {
 
 @Component({
   selector: 'article-view-popup',
-  templateUrl: 'article-view-popup.html',
+  templateUrl: './article-view-popup.html',
+  styleUrls: ['./article-view-popup.scss'],
 })
 export class Articleviewpopup {
+
+processing=false;
 constructor( public dialogRef: MatDialogRef<UnverifiedBlog>,@Inject(MAT_DIALOG_DATA) public data: any,
-            private blogServ:BlogService)
-{}
+            private blogServ:BlogService,private Auth:UsersServiceService,private router:Router)
+{
+  if(this.Auth.user?.role!==('admin')&&
+        this.Auth.user?.extraRoles!==('editor'||'IT')){
+          this.router.navigateByUrl('/member');
+          return;
+        }
+}
 async ApproveUser(id:String){
+  this.processing=true;
   await this.blogServ.AproveUnverifiedBlogs(id);
   this.dialogRef.close();
+  this.processing=false;
 }
 async DeclineUser(){
+  this.processing=true;
   this.dialogRef.close();
+  this.processing=false;
 }
+getImage(pic:any){
+  return this.blogServ.getImageURL(pic);
+}
+
+
 
 }

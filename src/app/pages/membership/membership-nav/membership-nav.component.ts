@@ -35,9 +35,35 @@ export class MembershipNavComponent implements OnInit {
       days: 0,
       firstWeekday:0,
       lastWeekday:0,
-      calendar: [[0]]}
-
+      calendar: [[0]]};
+    console.log(this.Auth.user)
   }
+
+  getIfRole(panel:String){
+    switch(panel){
+      case 'mm':
+        if(this.Auth.user?.role===('board-member'|| 'admin')||
+        this.Auth.user?.extraRoles===('registra')){
+          return '';
+        }
+        return 'hide';
+      case 'f':
+        if(this.Auth.user?.role===('admin')||
+        this.Auth.user?.extraRoles===('accounting'||'registra')){
+          return '';
+        }
+        return 'hide';
+      case 'p':
+        if(this.Auth.user?.role===('admin')||
+        this.Auth.user?.extraRoles===('editor'||'IT')){
+          return '';
+        }
+        return 'hide';
+        default:
+          return'';
+    }
+  }
+
   IfHome(){
     if(window.innerWidth>780){
       return true;

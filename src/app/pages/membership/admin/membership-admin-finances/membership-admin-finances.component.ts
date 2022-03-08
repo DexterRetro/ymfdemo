@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UsersServiceService } from 'src/app/services/users-service.service';
 
 @Component({
   selector: 'app-membership-admin-finances',
@@ -12,7 +14,13 @@ export class MembershipAdminFinancesComponent implements OnInit {
     { name: "Active", value: 15000 },
     { name: "UnActive", value: 150000 },
   ];
-  constructor() { }
+  constructor(private Auth:UsersServiceService,private router:Router) { 
+    if(this.Auth.user?.role!==('admin')&&
+    this.Auth.user?.extraRoles!==('accounting'||'registra')){
+      this.router.navigateByUrl('/member');
+      return;
+    }
+  }
 
   ngOnInit(): void {
   }

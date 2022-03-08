@@ -20,20 +20,19 @@ import { VerifyOldUserpopup } from 'src/app/templates/VerifyOldUserPopup/VerifyO
 })
 export class MembershipAdminComponent implements AfterViewInit {
   RegisteredColumns: string[] = ['YMFID', 'NAME', 'PROVINCE', 'CONTACTS','star'];
-  UnverifiedColumns: string[] = ['NAME','CONTACTS'];
+  UnverifiedColumns: string[] = ['NAME','CONTACTS','STATE'];
 
   dataSource: MatTableDataSource<User> | any;
   selection = new SelectionModel<User>(true, []);
   loadingReg=true;
   loadingUnReg=true;
-  UnverifiedUsers:[
-    {
-      userName?:String,
-      userSurname?:String,
-      email?:String,
-      phoneNumber?:String,
-      id?:any,
-      type?:String}]=[{id:'setter'}];
+  UnverifiedUsers:{
+    userName?:String,
+    userSurname?:String,
+    email?:String,
+    phoneNumber?:String,
+    id?:any,
+    type?:String}[]=[];
   NewUsers:UnverifiedUser[]=[];
   oldUsers:OldUsers[]=[];
   VerificationInprogress=false;
@@ -43,15 +42,20 @@ export class MembershipAdminComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort | undefined;
   @ViewChild(MatTable) tableUU: MatTable<{ userName: String; userSurname: String; email: String; phoneNumber: String; id: any; type: String; }> | undefined;
 
-  constructor(private userSer:UsersServiceService,private dialog:MatDialog) {
+  constructor(private userSer:UsersServiceService,private dialog:MatDialog,private router:Router) {
     this.Init();
   }
 
   async Init(){
+    if(this.userSer.user?.role!==('board-member'|| 'admin')&&
+        this.userSer.user?.extraRoles!==('registra')){
+          this.router.navigateByUrl('/member');
+          return;
+    }
     const NewUsersres= await this.userSer.GetUnverifiedUsers();
     NewUsersres.subscribe(response=>{
       this.NewUsers = response.Users;
-      this.fixArray();
+
       this.NewUsers.forEach(e=>{
         this.UnverifiedUsers.push({
           userName:e.userName,
@@ -67,7 +71,7 @@ export class MembershipAdminComponent implements AfterViewInit {
     const OldUserres = await this.userSer.GetTransUsers();
     OldUserres.subscribe(response=>{
       this.oldUsers = response.Users;
-      this.fixArray();
+
       this.oldUsers.forEach(e=>{
         this.UnverifiedUsers.push({
           userName:e.userName,
@@ -81,7 +85,16 @@ export class MembershipAdminComponent implements AfterViewInit {
       this.tableUU?.renderRows();
     });
   }
-  
+    
+  getAwaitingState(state:string):String{
+    if(state==='new'){
+      return 'Registration Approval'
+    }else if(state==='old'){
+      return 'Web Account Approval'
+    }
+    return 'Verification'
+  }
+
   viewUnverifiedUser(id:any,type:any){
     if(type==='new'){
       const user = this.NewUsers.find(e=>{
@@ -98,11 +111,6 @@ export class MembershipAdminComponent implements AfterViewInit {
     }
   }
 
-  fixArray(){
-    if(this.UnverifiedUsers[0].id==='setter'){
-      this.UnverifiedUsers.shift();
-    }
-  }
 
  async ngAfterViewInit() {
     const RegUsersres = await this.userSer.GetAllUsers();

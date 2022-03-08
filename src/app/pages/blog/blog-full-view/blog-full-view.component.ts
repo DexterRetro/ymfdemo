@@ -66,9 +66,8 @@ export class BlogFullViewComponent implements OnInit {
      this.commentForm = this.fb.group({name:['',Validators.required],
      comment:['',Validators.required]});
   }
-  getFormatedDate(date:any){
-    const d = new Date(date);
-    return this.datepipe.transform(d, 'yyyy-MM-dd');
+  getFormatedDate(date:String){
+    return date.split('T')[0];
   }
   getImage(pic:any){
     return this.blogServ.getImageURL(pic);

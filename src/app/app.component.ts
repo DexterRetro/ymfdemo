@@ -46,6 +46,31 @@ export class AppComponent implements AfterViewInit {
     }
     return false;
   }
+  
+  getIfRole(panel:String){
+    switch(panel){
+      case 'mm':
+        if(this.UserServ.user?.role===('board-member'|| 'admin')||
+        this.UserServ.user?.extraRoles===('registra')){
+          return '';
+        }
+        return 'hide';
+      case 'f':
+        if(this.UserServ.user?.role===('admin')||
+        this.UserServ.user?.extraRoles===('accounting'||'registra')){
+          return '';
+        }
+        return 'hide';
+      case 'p':
+        if(this.UserServ.user?.role===('admin')||
+        this.UserServ.user?.extraRoles===('editor'||'IT')){
+          return '';
+        }
+        return 'hide';
+      default:
+        return'';
+    }
+  }
   getCancelActions(thing:String):String{
     if(this.smallScreenState){
       switch(thing){

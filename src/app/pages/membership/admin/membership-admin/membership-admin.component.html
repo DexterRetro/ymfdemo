@@ -76,6 +76,12 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Contacts </th>
         <td mat-cell *matCellDef="let row"> PHONE: {{row.phoneNumber}}<br>EMAIL: {{row.email}} </td>
       </ng-container>
+
+      <!-- CONTACTS Column -->
+      <ng-container matColumnDef="STATE">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> AWAITING </th>
+        <td mat-cell *matCellDef="let row">{{getAwaitingState(row.type)}}</td>
+      </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="UnverifiedColumns"></tr>
       <tr mat-row (click)="viewUnverifiedUser(row.id,row.type)" *matRowDef="let row; columns: UnverifiedColumns;"></tr>

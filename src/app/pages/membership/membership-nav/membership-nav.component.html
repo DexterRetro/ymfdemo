@@ -10,12 +10,12 @@
     SETTINGS
   </div>
   <div class="breakline"></div>
-  <div class='panel gc {{getSelectedState("users")}}' routerLink="/member/loggedIn/admin/members">
+  <div class='panel gc {{getSelectedState("users")}} {{getIfRole("mm")}}' routerLink="/member/loggedIn/admin/members">
     <i class="fas fa-users"></i><br>
     MANAGE MEMBERS
   </div>
   <div class="breakline"></div>
-  <div class='panel gc {{getSelectedState("finance")}}' routerLink="/member/loggedIn/admin/finance">
+  <div class='panel gc {{getSelectedState("finance")}}  {{getIfRole("f")}}' routerLink="/member/loggedIn/admin/finance">
     <i class="fas fa-file-invoice-dollar"></i><br>
     FINANCES
   </div>
@@ -25,7 +25,7 @@
     UPLOAD ARTICLE
   </div>
   <div class="breakline"></div>
-  <div class='panel gc {{getSelectedState("blogeditor")}}'routerLink="/member/loggedIn/admin/blog">
+  <div class='panel gc {{getSelectedState("blogeditor")}}  {{getIfRole("p")}}'routerLink="/member/loggedIn/admin/blog">
     <i class="fas fa-newspaper"></i><br>
     PUBLICATIONS
   </div>
@@ -70,12 +70,15 @@
         <div class="calendarSlot">Sat</div>
       </div>
       <div class="Dates" *ngFor="let weeks of Calender.calendar">
-      <div class="calendarSlot {{checkCalenderDateVisibility(days)}}"*ngFor="let days of weeks">{{days}}</div>
+      <div matTooltip="Info about the action" class="calendarSlot {{checkCalenderDateVisibility(days)}} "*ngFor="let days of weeks">{{days}}</div>
       </div>
     </div>
     <div class="payments animate__animated animate__fadeIn" >
       <h4>SUBSCRIPTIONS PAYMENTS <i class="fas fa-money-bill-alt"></i></h4>
       <div class="paymentOptions">
+        <form action="paymentForm">
+
+        </form>
         <a href='https://www.paynow.co.zw/Payment/BillPaymentLink/?q=aWQ9MTMzMTYmYW1vdW50PTEwMDAuMDAmYW1vdW50X3F1YW50aXR5PTAuMDAmZjE9TW9udGhseStTdWImbD0x' target='_blank'>
           <button mat-raised-button>
             <img src="assets/button_pay-now_large.svg" alt="">

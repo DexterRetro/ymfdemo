@@ -4,6 +4,7 @@ export interface User {
   userSurname: String;
   YMFID?:String;
   role?: String;
+  extraRoles?:String;
   password?: String;
   passwordChangedAt?: Date;
   passwordConfirm?: String;

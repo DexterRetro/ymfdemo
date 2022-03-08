@@ -1,6 +1,24 @@
-<h1 mat-dialog-title>{{data.Title}}</h1>
-<div mat-dialog-content>{{data.formatedParas}}</div>
-<div  mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="ApproveUser(data._id)">Approve</button>
-  <button mat-button mat-dialog-close (click)="DeclineUser()">Decline</button>
+<div class="content">
+  <h1 mat-dialog-title>{{data.Topic}}</h1>
+  <div class="paragraph" mat-dialog-content>
+    <h3>BY:{{data.Author}}</h3>
+    <div *ngFor="let para of data.Content">
+      <p>{{para.paragraph}}</p>
+            <div class="images" *ngIf="para.PImage.ImbededImg">
+                <div class="image">
+                    <img [src]="getImage(para.PImage.ImbededImg)" alt="">
+                    <i>{{para.PImage.caption}}</i>
+               </div>
+            </div>
+    </div>
+  </div>
+  <div  mat-dialog-actions *ngIf="!processing">
+    <button style="background-color: green; color: white;" mat-button mat-dialog-close (click)="ApproveUser(data._id)">Approve</button>
+    <button style="background-color: red; color: white;" mat-button mat-dialog-close (click)="DeclineUser()">Decline</button>
+  </div>
+  <div class="uploader-status" *ngIf="processing">
+    <mat-spinner></mat-spinner>
+  </div>
+
 </div>
+

@@ -89,7 +89,7 @@ export class UsersServiceService {
      await this.http.post<{message: String;token: String;User: User;}>
      (`${environment.backendAPIURL}/logIn`, loginform);
      Response.subscribe(resObj=>{
-      if (resObj.message === 'Log In Successfull') {
+      if (resObj.message.toLowerCase().includes('successful')) {
         this.isAuthenticated = true;
         this.user = resObj.User;
         localStorage.setItem('AuthToken', resObj.token.toString());

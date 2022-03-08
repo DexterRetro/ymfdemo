@@ -1,0 +1,21 @@
+.content{
+    width: 100%;
+    .paragraph{
+        width:90%;
+        text-align: justify;
+        .images{
+            width: 70%;
+            .image{
+                img{
+                height: 300px;
+                width: 100%;
+                object-fit: cover;
+                object-position: center;
+                }
+            }
+        }
+    }
+}
+.uploader-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #ffcd04;
+}

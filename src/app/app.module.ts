@@ -18,6 +18,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator'; 
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -29,7 +31,7 @@ import { MembershipLogInComponent } from './pages/membership/membership-log-in/m
 import { MembershipSignUpComponent } from './pages/membership/membership-sign-up/membership-sign-up.component';
 import { MembershipHomeComponent } from './pages/membership/membership-nav/membership-home/membership-home.component';
 import { MembershipAdminComponent } from './pages/membership/admin/membership-admin/membership-admin.component';
-import { MembershipAdminBlogComponent } from './pages/membership/admin/membership-admin-blog/membership-admin-blog.component';
+import { Articleviewpopup, MembershipAdminBlogComponent } from './pages/membership/admin/membership-admin-blog/membership-admin-blog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MembershipSettingsComponent } from './pages/membership/membership-nav/membership-settings/membership-settings.component';
 import { MembershipNavComponent } from './pages/membership/membership-nav/membership-nav.component';
@@ -41,6 +43,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { MembershipAdminFinancesComponent } from './pages/membership/admin/membership-admin-finances/membership-admin-finances.component';
 import { MembershipBlogComponent } from './pages/membership/membership-nav/membership-blog/membership-blog.component';
 import { TestpageComponent } from './pages/testpage/testpage.component';
+import { VerifyNewUserpopup } from './templates/VerifyNewUserPopup/VerifyNewUser-popup';
+import { VerifyOldUserpopup } from './templates/VerifyOldUserPopup/VerifyOldUser-popup';
 
 @NgModule({
   declarations: [
@@ -60,6 +64,10 @@ import { TestpageComponent } from './pages/testpage/testpage.component';
     MembershipAdminFinancesComponent,
     MembershipBlogComponent,
     TestpageComponent,
+    Articleviewpopup,
+    VerifyNewUserpopup,
+    VerifyOldUserpopup
+
   ],
   imports: [
     BrowserModule,
@@ -81,7 +89,9 @@ import { TestpageComponent } from './pages/testpage/testpage.component';
     MatPaginatorModule,
     MatExpansionModule,
     MatBadgeModule,
-    NgxChartsModule
+    NgxChartsModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule
 
   ],
   providers: [

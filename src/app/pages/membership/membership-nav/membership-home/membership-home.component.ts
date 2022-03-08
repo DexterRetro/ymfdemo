@@ -30,7 +30,7 @@ export class MembershipHomeComponent implements OnInit {
       return 'Active';
     }
   }
-  getFormatedDate(date:any){
-    return `${new Date(date).getDate()}/${new Date(date).getMonth()}/${new Date(date).getFullYear()}`
+  getFormatedDate(date:String){
+    return date.split('T')[0];
   }
 }
