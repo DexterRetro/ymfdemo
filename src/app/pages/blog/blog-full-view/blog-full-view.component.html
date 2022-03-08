@@ -52,8 +52,10 @@
             <div class="warn"  *ngIf="commentForm.controls['comment'].invalid&&(commentForm.controls['comment'].dirty||commentForm.controls['comment'].touched)">A comment is required!</div>
             <button type="submit" (click)="commentOnBlog()"
             [disabled]="commentForm.pristine || commentForm.invalid"mat-raised-button >Comment</button>
-           <div class="share">
+           
+            <div class="share">
                <label >Share On</label>
+                             
                <a href="#"><span class="fab fa-facebook-f"></span></a>
                <a href="#"><span class="fab fa-twitter"></span></a>
                <a href="#"><span class="fab fa-instagram"></span></a>

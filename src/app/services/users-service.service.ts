@@ -98,6 +98,18 @@ export class UsersServiceService {
     });
     return Response;
   }
+
+  async MakePayment(payment:{membershipType:String}):Promise<Observable<{message:String,RedrirectUrl:String}>>{
+    const Result = await this.http.post<{message:String,RedrirectUrl:String}>(`${environment.backendAPIURL}/pay`,payment);
+    return Result;
+  }
+
+  
+  async UploadProofOfPayment(payment:any):Promise<Observable<{message:String}>>{
+    const Result = await this.http.post<{message:String}>(`${environment.backendAPIURL}/paymentConfirm`,payment);
+    return Result;
+  }
+
   async PollPayementResult():Promise<Observable<{message:String;PollResult:{status:String;success:Boolean;hasRedirect:Boolean},token:String}>>{
     const Result =
       await this.http.post<{message:String;PollResult:{status:String;success:Boolean;hasRedirect:Boolean},token:String;user:User}>

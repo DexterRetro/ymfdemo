@@ -27,11 +27,12 @@ export class BlogFullViewComponent implements OnInit {
       }
     ],
   };
-
+  currentURL='';
   commentForm:FormGroup |any ;
   constructor(private blogServ:BlogService,private activerouter:ActivatedRoute,
               private router:Router,private fb:FormBuilder,private datepipe: DatePipe) { 
-          
+    this.currentURL = window.location.href; 
+    console.log(this.currentURL)
     const id = activerouter.snapshot.paramMap.get('id');
     if(!id){
       console.log('no id in Params')

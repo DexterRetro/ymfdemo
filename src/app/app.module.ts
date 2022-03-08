@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgxChartsModule }from '@swimlane/ngx-charts';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -34,7 +36,7 @@ import { MembershipAdminComponent } from './pages/membership/admin/membership-ad
 import { Articleviewpopup, MembershipAdminBlogComponent } from './pages/membership/admin/membership-admin-blog/membership-admin-blog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MembershipSettingsComponent } from './pages/membership/membership-nav/membership-settings/membership-settings.component';
-import { MembershipNavComponent } from './pages/membership/membership-nav/membership-nav.component';
+import { MembershipNavComponent, MembersPopUpPayment } from './pages/membership/membership-nav/membership-nav.component';
 import { SignUpValidationComponent } from './pages/membership/sign-up-validation/sign-up-validation.component';
 import { BlogListComponent } from './pages/blog/blog-list/blog-list.component';
 import { BlogFullViewComponent } from './pages/blog/blog-full-view/blog-full-view.component';
@@ -45,6 +47,7 @@ import { MembershipBlogComponent } from './pages/membership/membership-nav/membe
 import { TestpageComponent } from './pages/testpage/testpage.component';
 import { VerifyNewUserpopup } from './templates/VerifyNewUserPopup/VerifyNewUser-popup';
 import { VerifyOldUserpopup } from './templates/VerifyOldUserPopup/VerifyOldUser-popup';
+
 
 @NgModule({
   declarations: [
@@ -66,7 +69,8 @@ import { VerifyOldUserpopup } from './templates/VerifyOldUserPopup/VerifyOldUser
     TestpageComponent,
     Articleviewpopup,
     VerifyNewUserpopup,
-    VerifyOldUserpopup
+    VerifyOldUserpopup,
+    MembersPopUpPayment
 
   ],
   imports: [
@@ -91,8 +95,10 @@ import { VerifyOldUserpopup } from './templates/VerifyOldUserPopup/VerifyOldUser
     MatBadgeModule,
     NgxChartsModule,
     MatProgressSpinnerModule,
-    MatTooltipModule
-
+    MatTooltipModule,
+    ShareButtonsModule,
+    ShareIconsModule,
+    
   ],
   providers: [
     DatePipe,

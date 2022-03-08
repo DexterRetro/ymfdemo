@@ -1,0 +1,50 @@
+<h3 mat-dialog-title>Payment Confirmation</h3>
+<div mat-dialog-content class="detail">
+    <form class="paymentConfirmationForm" [formGroup]="paymentForm" (submit)=" uploadPaymentConfirmation()">
+        <mat-form-field appearance="standard">
+          <mat-label>Payment Platform</mat-label>
+          <mat-select formControlName="payment">
+            <mat-option value="ecocash">ECOCASH</mat-option>
+            <mat-option value="oneMoney">ONEMONEY</mat-option>
+            <mat-option value="BankTransfer">BANK TRANSFER</mat-option>
+            <mat-option value="MasterCard">MASTERCARD</mat-option>
+            <mat-option value="Visa">VISA</mat-option>
+            <mat-option value="mkuru">Mkuru</mat-option>
+            <mat-option value="innbucks">InnBucks</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="standard" style="width: 80%">
+          <mat-label>Payment Confirmation Code</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="REF CODE"
+            formControlName="refCode"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="standard" style="width: 80%">
+          <mat-label>Amount Paid</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="Amount Payed"
+            formControlName="amount"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="standard" style="width: 80%">
+          <mat-label>Purpose of Payment</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Purpose Ex. Payment of Subscription"
+            formControlName="purpose"
+          />
+        </mat-form-field>
+        <br>
+        <button *ngIf="!processing" style="color: white; background-color: #ffcd04; width: 200px; margin: auto;" formaction="submit" mat-raised-button [disabled]="!paymentForm.valid">Submit</button>
+      </form>
+      <div class="uploader-status" *ngIf="processing">
+        <mat-spinner></mat-spinner>
+      </div>
+</div>

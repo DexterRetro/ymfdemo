@@ -3,12 +3,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HostListener } from '@angular/core';
 import { EventsServiceService } from 'src/app/services/events-service.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-membership-nav',
   templateUrl: './membership-nav.component.html',
   styleUrls: ['./membership-nav.component.scss'],
 })
 export class MembershipNavComponent implements OnInit {
+  
 
   IsSmallScreen=false;
   ShowMobileNots =true;
@@ -25,7 +28,8 @@ export class MembershipNavComponent implements OnInit {
     calendar: [[Number]]
   }
   UserNotifications:[{NotHeader:String,NotContent:String,NotExpirery:Date}] | any;
-  constructor(private router: Router, private Auth: UsersServiceService,private events:EventsServiceService) {
+  constructor(private router: Router, private Auth: UsersServiceService,
+    private events:EventsServiceService,private matDialog:MatDialog) {
     this.Calender={year:'',
       yearAbbr:'',
       month:'',
@@ -36,8 +40,10 @@ export class MembershipNavComponent implements OnInit {
       firstWeekday:0,
       lastWeekday:0,
       calendar: [[0]]};
-    console.log(this.Auth.user)
+     
   }
+  
+
 
   getIfRole(panel:String){
     switch(panel){
@@ -63,7 +69,9 @@ export class MembershipNavComponent implements OnInit {
           return'';
     }
   }
-
+  OpenPaymentDialog(){
+    this.matDialog.open(MembersPopUpPayment);
+  }
   IfHome(){
     if(window.innerWidth>780){
       return true;
@@ -153,5 +161,38 @@ export class MembershipNavComponent implements OnInit {
 
   logOut() {
     this.Auth.LogOut();
+  }
+}
+
+@Component({
+  selector: 'members-popUp-payment',
+  templateUrl: './payment-popUp.html',
+  styleUrls: ['./payment-popUp.scss'],
+})
+
+export class MembersPopUpPayment implements OnInit{
+  paymentForm:FormGroup|any;
+  processing=false;
+  constructor(private fb:FormBuilder,private UserServ:UsersServiceService,public dialogRef: MatDialogRef<MembersPopUpPayment>){
+    this.paymentForm=fb.group({
+      payment:['',Validators.required],
+      refCode:['',Validators.required],
+      amount:['',Validators.required],
+      purpose:['',Validators.required]
+    });
+  }
+  ngOnInit(): void {
+  }
+
+  async uploadPaymentConfirmation(){
+    this.dialogRef.disableClose = true;
+    this.processing=true;
+   const res=await this.UserServ.UploadProofOfPayment(this.paymentForm.value);
+   res.subscribe(r=>{
+    this.processing=false;
+    this.dialogRef.disableClose = false;
+    this.dialogRef.close();
+   })
+  
   }
 }

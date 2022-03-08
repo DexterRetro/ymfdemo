@@ -1,0 +1,24 @@
+.detail{
+    overflow: auto;
+}
+.agree,.decline{
+
+    color: white;
+
+}
+.agree{
+    background-color: green;
+}
+.decline{
+    background-color: red;
+}
+
+.detail{
+    margin: auto;
+    font-size: 15px;
+    text-align: justify;
+    margin-bottom: 10px;
+}
+.uploader-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #ffcd04;
+}
