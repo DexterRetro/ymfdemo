@@ -4,10 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href=https://dexterretro.github.io/ymfdemo/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "buid-prod": "ng build --prod --base-href=https://dexterretro.github.io/ymfdemo/",
     "host": "npx angular-cli-ghpages --dir=dist/YMFWeb"
   },
   "private": true,
