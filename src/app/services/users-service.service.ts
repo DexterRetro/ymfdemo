@@ -99,6 +99,24 @@ export class UsersServiceService {
     return Response;
   }
 
+  async logInWithToken():
+    Promise<Observable<{message: String;user: User;}>>
+    {
+    const Response =
+     await this.http.get<{message: String;user: User;}>
+     (`${environment.backendAPIURL}/logIn`);
+     Response.subscribe(resObj=>{
+      if (resObj.message.toLowerCase().includes('successful')) {
+ 
+        this.isAuthenticated = true;
+        this.user = resObj.user;
+        this.router.navigateByUrl('/member/loggedIn');
+      }
+    });
+    return Response;
+  }
+
+
   async MakePayment(payment:{membershipType:String}):Promise<Observable<{message:String,RedrirectUrl:String}>>{
     const Result = await this.http.post<{message:String,RedrirectUrl:String}>(`${environment.backendAPIURL}/pay`,payment);
     return Result;

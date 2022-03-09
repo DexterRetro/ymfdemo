@@ -1,0 +1,18 @@
+.uploader-status ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: white;
+}
+.uploader-status{
+    mat-spinner{
+        margin: auto;
+    }
+    
+}
+.content{
+    background-color: #ffcd04;
+    height: 99%;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+    color: white;
+
+}

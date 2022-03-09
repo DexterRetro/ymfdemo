@@ -2,8 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgxChartsModule }from '@swimlane/ngx-charts';
-import { ShareIconsModule } from 'ngx-sharebuttons/icons';
-import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareModule } from 'ngx-sharebuttons';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -47,6 +46,7 @@ import { MembershipBlogComponent } from './pages/membership/membership-nav/membe
 import { TestpageComponent } from './pages/testpage/testpage.component';
 import { VerifyNewUserpopup } from './templates/VerifyNewUserPopup/VerifyNewUser-popup';
 import { VerifyOldUserpopup } from './templates/VerifyOldUserPopup/VerifyOldUser-popup';
+import { AuthLogInComponent } from './pages/membership/auth-log-in/auth-log-in.component';
 
 
 @NgModule({
@@ -70,7 +70,8 @@ import { VerifyOldUserpopup } from './templates/VerifyOldUserPopup/VerifyOldUser
     Articleviewpopup,
     VerifyNewUserpopup,
     VerifyOldUserpopup,
-    MembersPopUpPayment
+    MembersPopUpPayment,
+    AuthLogInComponent
 
   ],
   imports: [
@@ -96,8 +97,7 @@ import { VerifyOldUserpopup } from './templates/VerifyOldUserPopup/VerifyOldUser
     NgxChartsModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
-    ShareButtonsModule,
-    ShareIconsModule,
+    ShareModule
     
   ],
   providers: [

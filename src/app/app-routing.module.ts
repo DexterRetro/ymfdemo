@@ -19,6 +19,7 @@ import { BlogListComponent } from './pages/blog/blog-list/blog-list.component';
 import { TestpageComponent } from './pages/testpage/testpage.component';
 import { MembershipAdminFinancesComponent } from './pages/membership/admin/membership-admin-finances/membership-admin-finances.component';
 import { MembershipBlogComponent } from './pages/membership/membership-nav/membership-blog/membership-blog.component';
+import { AuthLogInComponent } from './pages/membership/auth-log-in/auth-log-in.component';
 const routes: Routes = [
   {
     path: '',
@@ -60,6 +61,10 @@ const routes: Routes = [
         path: '',
         redirectTo: 'loggedIn',
         pathMatch: 'full',
+      },
+      {
+        path:'authenticate',
+        component:AuthLogInComponent
       },
       {
         path: 'loggedIn',

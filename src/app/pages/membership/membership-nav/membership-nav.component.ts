@@ -1,7 +1,6 @@
 import { UsersServiceService } from './../../../services/users-service.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HostListener } from '@angular/core';
 import { EventsServiceService } from 'src/app/services/events-service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -48,20 +47,23 @@ export class MembershipNavComponent implements OnInit {
   getIfRole(panel:String){
     switch(panel){
       case 'mm':
-        if(this.Auth.user?.role===('board-member'|| 'admin')||
-        this.Auth.user?.extraRoles===('registra')){
+        if(this.Auth.user?.role==='admin'||
+        this.Auth.user?.role==='board-member'||
+        this.Auth.user?.extraRoles==='registra'){
           return '';
         }
         return 'hide';
       case 'f':
         if(this.Auth.user?.role===('admin')||
-        this.Auth.user?.extraRoles===('accounting'||'registra')){
+        this.Auth.user?.extraRoles==='accounting'||
+        this.Auth.user?.extraRoles==='registra'){
           return '';
         }
         return 'hide';
       case 'p':
         if(this.Auth.user?.role===('admin')||
-        this.Auth.user?.extraRoles===('editor'||'IT')){
+        this.Auth.user?.extraRoles==='editor'||
+        this.Auth.user?.extraRoles==='IT'){
           return '';
         }
         return 'hide';
