@@ -302,6 +302,32 @@ section .container > * {
     }
   }
 }
+.gallery{
+  height: 500px;
+  width: 100%;
+  margin: auto;
+  .gallerypicView,.gallerypicViewOut{
+    height: 100%;
+    width: 100%;
+    overflow:hidden ;
+    img{
+      height: 90%;
+      width: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+    .caption{
+      font-size: larger;
+      text-align: center;
+      height: 10%;
+      background-color: #ffcd04;
+      color: white;
+    }
+  }
+  .hide{
+    display: none;
+  }
+}
 .Main {
   min-height: 100vh;
   padding-top: 10%;

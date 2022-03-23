@@ -161,6 +161,9 @@ export class MembershipNavComponent implements OnInit {
     return ''
   }
 
+  async paySub(){
+    const res = await this.Auth.PaySub();
+  }
   logOut() {
     this.Auth.LogOut();
   }

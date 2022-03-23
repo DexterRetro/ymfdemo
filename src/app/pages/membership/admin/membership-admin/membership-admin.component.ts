@@ -47,8 +47,9 @@ export class MembershipAdminComponent implements AfterViewInit {
   }
 
   async Init(){
-    if(this.userSer.user?.role!==('board-member'|| 'admin')&&
-        this.userSer.user?.extraRoles!==('registra')){
+    if(this.userSer.user?.role!=='admin'&&
+       this.userSer.user?.role!=='board-member'&&
+        this.userSer.user?.extraRoles!=='registra'){
           this.router.navigateByUrl('/member');
           return;
     }

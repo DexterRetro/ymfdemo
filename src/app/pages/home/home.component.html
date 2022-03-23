@@ -125,6 +125,16 @@
     <div></div>
   </div>
 </section>
+<div class="gallery" *ngIf="ImagesSet">
+  <div *ngIf="ImagesSet[currentImageIndex]" class="gallerypicView {{ ChangeImages('show')}} animate__animated animate__fadeIn">
+    <img [src]="getPicUrl(ImagesSet[currentImageIndex]._id)" alt="">
+    <div *ngIf="ImagesSet[currentImageIndex].PictureCaption" class="caption"><p>{{ImagesSet[currentImageIndex].PictureCaption}}</p></div>
+  </div>
+  <div *ngIf="ImagesSet[currentImageIndex]" class="gallerypicViewOut {{ ChangeImages('showout')}} animate__animated animate__fadeOut animate__slow">
+    <img [src]="getPicUrl(ImagesSet[currentImageIndex]._id)" alt="">
+    <div *ngIf="ImagesSet[currentImageIndex].PictureCaption" class="caption"><p>{{ImagesSet[currentImageIndex].PictureCaption}}</p></div>
+  </div>
+</div>
 <div class="Main">
   <h1 class="animate__animated animate__fadeInDown">About YMF</h1>
   <div class="cards">

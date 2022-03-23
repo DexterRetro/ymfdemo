@@ -24,6 +24,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -46,7 +47,9 @@ import { MembershipBlogComponent } from './pages/membership/membership-nav/membe
 import { TestpageComponent } from './pages/testpage/testpage.component';
 import { VerifyNewUserpopup } from './templates/VerifyNewUserPopup/VerifyNewUser-popup';
 import { VerifyOldUserpopup } from './templates/VerifyOldUserPopup/VerifyOldUser-popup';
+import { Paymentprocessing } from './templates/paymentProcessing/Payment-processing';
 import { AuthLogInComponent } from './pages/membership/auth-log-in/auth-log-in.component';
+import { GalleryComponent } from './pages/gallery/gallery.component';
 
 
 @NgModule({
@@ -71,7 +74,9 @@ import { AuthLogInComponent } from './pages/membership/auth-log-in/auth-log-in.c
     VerifyNewUserpopup,
     VerifyOldUserpopup,
     MembersPopUpPayment,
-    AuthLogInComponent
+    AuthLogInComponent,
+    Paymentprocessing,
+    GalleryComponent
 
   ],
   imports: [

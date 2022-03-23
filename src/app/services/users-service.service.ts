@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { User } from './../models/user';
 import { UnverifiedUser } from '../models/unverifiedUser';
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { OldUsers } from '../models/OldUsers';
 @Injectable({
   providedIn: 'root',
@@ -77,11 +76,15 @@ export class UsersServiceService {
     });
     return Response;
   }
-  
-  getImageURL(imageName:any){
-    return `${environment.backendRoot}pictures/${imageName}`;
+  getImageURL(imageQuery:String){
+    if(!imageQuery){
+      return ''
+    }
+    const formatedQuery = imageQuery.split('/')
+    const Url = `${environment.backendAPIURL}/file?folder=${formatedQuery[0]}&filename=${formatedQuery[1]}`
+    return Url;
   }
-
+  
   async logIn(loginform:any):
     Promise<Observable<{message: String;token: String;User: User;}>>
     {
@@ -110,15 +113,20 @@ export class UsersServiceService {
  
         this.isAuthenticated = true;
         this.user = resObj.user;
-        this.router.navigateByUrl('/member/loggedIn');
+        this.router.navigateByUrl('/member/loggedIn/home');
+      }else{
+        this.router.navigateByUrl('/member/logIn');
+        localStorage.removeItem('AuthToken');
+        this.user = undefined;
+        this.isAuthenticated = false;
       }
     });
     return Response;
   }
 
 
-  async MakePayment(payment:{membershipType:String}):Promise<Observable<{message:String,RedrirectUrl:String}>>{
-    const Result = await this.http.post<{message:String,RedrirectUrl:String}>(`${environment.backendAPIURL}/pay`,payment);
+  async PaySub():Promise<Observable<{message:String,RedrirectUrl:String}>>{
+    const Result = await this.http.post<{message:String,RedrirectUrl:String}>(`${environment.backendAPIURL}/pay`,this.user?._id);
     return Result;
   }
 

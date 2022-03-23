@@ -19,8 +19,8 @@ export class MembershipHomeComponent implements OnInit {
 
 
 
-  getProfilePic(picName:any) {
-    return this.auth.getImageURL(picName);
+  getProfilePic(picName:any){
+   return this.auth.getImageURL(picName);
   }
 
   getMembershipvalidity(){
@@ -33,4 +33,5 @@ export class MembershipHomeComponent implements OnInit {
   getFormatedDate(date:String){
     return date.split('T')[0];
   }
+
 }

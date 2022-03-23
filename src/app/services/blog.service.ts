@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BlogPost } from '../models/blog-post';
+import { GalleryModel } from '../models/gallery';
 import { UnverifiedBlog } from '../models/unverifiedBlog';
 
 @Injectable({
@@ -24,10 +25,27 @@ export class BlogService {
     const Blogs = await this.http.post<{message:String}>(`${environment.backendAPIURL}/blog/unverified`,id);
     return Blogs;
   } 
-  getImageURL(imageName:any){
-    return `${environment.backendRoot}pictures/${imageName}`;
+
+  getImageURL(imageQuery:String){
+    if(!imageQuery){
+      return ''
+    }
+    const formatedQuery = imageQuery.split('/')
+    const Url = `${environment.backendAPIURL}/file?folder=${formatedQuery[0]}&filename=${formatedQuery[1]}`
+    return Url;
   }
-  
+  getImageURLwithId(imageQuery:String){
+    if(!imageQuery){
+      return ''
+    }
+    const Url = `${environment.backendAPIURL}/file?id=${imageQuery}`
+    return Url;
+  }
+
+  async GetGalleyImages():Promise<Observable<{message:String,images:GalleryModel[]}>>{
+    const gallery = await this.http.get<{message:String,images:GalleryModel[]}>(`${environment.backendAPIURL}/gallery`);
+    return gallery;
+  }
   async UploadBlog(blog:BlogPost,CoverPhoto:any,ImbededImages:[{Image:String,ImageFile:any,index:Number}],captions:[String]):Promise<Observable<{message:String,Blog:BlogPost}>>{
     blog.blogPicture=CoverPhoto;
     for (let index = 0; index < ImbededImages.length; index++) {

@@ -24,7 +24,7 @@ export class MembershipSettingsComponent implements OnInit {
       oldPassword:['',Validators.required],
       savedProfPic:['']
     })
-    this.imageSrc = auth.getImageURL(auth.user?.ProfilePhoto);
+   // this.imageSrc = auth.getImageURL(auth.user?.ProfilePhoto);
   }
 
   ngOnInit(): void {}

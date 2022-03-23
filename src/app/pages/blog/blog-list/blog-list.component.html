@@ -2,7 +2,7 @@
   <div class="ads">
     <img src="assets/ymftopAd.png" alt="ad">
   </div>
-  <div class="header animate__animated animate__fadeIn">
+  <div *ngIf="blogs.length>0 &&!showLoader" class="header animate__animated animate__fadeIn">
     <img src="assets/ymfTransAlt.png" alt="">
     <h1>BLOG</h1>
   </div>
@@ -21,7 +21,7 @@
   <h3>Articles Not Available</h3>
   <i class="far fa-folder-open  fa-10x"></i>
 </div>
-  <div class="cards animate__animated animate__fadeIn" *ngIf="blogs">
+  <div class="cards animate__animated animate__fadeIn" *ngIf="blogs.length>0">
     <div class="card animate__animated animate__fadeInUp" *ngFor="let blog of blogs; let i = index" [routerLink]="'/blog/'+blog._id">
       <img [src]="getImageUrl(blog.blogPicture)" alt="">
       <div class="info">
@@ -31,23 +31,5 @@
     </div>
   </div>
   </div>
-  <div class="pageNumbers">
-    <div class="lbtn">
-      <i class="far fa-caret-square-left fa-3x"></i>
-    </div>
-    <div class="numbers">
-      <div class="firstnumber">1</div>
-      <div class="number selected">2</div>
-      <div class="number">3</div>
-      <div class="number">4</div>
-      <div class="number">5</div>
-      <div class="number">6</div>
-      <div class="number">7</div>
-      <div class="dashes">............</div>
-      <div class="lastnumber">Last</div>
-    </div>
-    <div class="rbtn">
-      <i class="far fa-caret-square-right fa-3x"></i>
-    </div>
-  </div>
+ 
 </div>

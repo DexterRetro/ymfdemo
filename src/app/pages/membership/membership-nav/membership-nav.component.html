@@ -76,11 +76,9 @@
     <div class="payments animate__animated animate__fadeIn" >
       <h4>PAYMENTS <i class="fas fa-money-bill-alt"></i></h4>
       <div class="paymentOptions">
-        <a href='https://www.paynow.co.zw/Payment/BillPaymentLink/?q=aWQ9MTMzMTYmYW1vdW50PTEwMDAuMDAmYW1vdW50X3F1YW50aXR5PTAuMDAmZjE9TW9udGhseStTdWImbD0x' target='_blank'>
-          <button mat-raised-button style="color: white; background-color: #ffcd04; width: 200px; margin: auto;" >
-            PAY NOW
-          </button>
-        </a>
+        <button (click)="paySub()" mat-raised-button style="color: white; background-color: #ffcd04; width: 200px; margin: auto;" >
+          PAY NOW
+        </button>
       </div>
       <button mat-raised-button style="color: white; background-color: #ffcd04; width: 200px; margin: auto;" 
       (click)="OpenPaymentDialog()">

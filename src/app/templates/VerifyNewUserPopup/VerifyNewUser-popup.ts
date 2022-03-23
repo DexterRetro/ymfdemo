@@ -21,6 +21,7 @@ async DeclineUser(){
   this.dialogRef.close();
 }
   getImageURL(image:String):String{
-   return this.userServ.getImageURL(image);
+    return ''
+   //return this.userServ.getImageURL(image);
   }
 }

@@ -16,7 +16,6 @@ export class LogInGuardGuard implements CanActivate {
       return true;
     }else{
       if(this.user.getToken()){
-        console.log(this.user.getToken())
         this.router.navigateByUrl('/member/authenticate');
       }else{
         this.router.navigateByUrl('/member/logIn');

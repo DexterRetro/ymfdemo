@@ -1,4 +1,64 @@
 
 <div class="main">
-<h1>STILL UNDER CONSTRUCTION!</h1>
-<i class="fas fa-tools fa-10x"></i></div>
+    <div class="Completed Transactions">
+        <h1>Transactions</h1>
+        <mat-form-field appearance="standard">
+            <mat-label>SEARCH Transactions</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Look for specific Member" #input>
+          </mat-form-field>
+          
+          <div class="loader" *ngIf="loading">
+            <div class="spinner">
+              <div class="rect1"></div>
+              <div class="rect2"></div>
+              <div class="rect3"></div>
+              <div class="rect4"></div>
+              <div class="rect5"></div>
+            </div>
+          </div>
+          <div class="mat-elevation-z8" *ngIf="!loading" style="overflow: auto;">
+            <table mat-table [dataSource]="dataSource" matSort >
+          
+              <!-- ID Column -->
+              <ng-container matColumnDef="YMFID">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                <td mat-cell *matCellDef="let row"> {{row.YMFID}} </td>
+              </ng-container>
+          
+              <!-- NAME Column -->
+              <ng-container matColumnDef="NAME">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> NAME </th>
+                <td mat-cell *matCellDef="let row"> {{row.userName}} {{row.userSurname}} </td>
+              </ng-container>
+          
+              <!-- PROVINCE Column -->
+              <ng-container matColumnDef="PROVINCE">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Province </th>
+                <td mat-cell *matCellDef="let row"> {{row.Province}} </td>
+              </ng-container>
+          
+              <!-- CONTACTS Column -->
+              <ng-container matColumnDef="CONTACTS">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Contacts </th>
+                <td mat-cell *matCellDef="let row"> PHONE: {{row.phoneNumber}}<br>EMAIL: {{row.email}} </td>
+              </ng-container>
+                <!-- Star Column -->
+              <ng-container matColumnDef="star" stickyEnd>
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                </td>
+              </ng-container>
+          
+              <tr mat-header-row *matHeaderRowDef="Columns"></tr>
+              <tr mat-row *matRowDef="let row; columns: Columns;"></tr>
+          
+              <!-- Row shown when there is no matching data. -->
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No Members matching "{{input.value}}"</td>
+              </tr>
+            </table>
+          
+            <mat-paginator  [pageSizeOptions]="[10, 20,50]" aria-label="Select page of users"></mat-paginator>
+          </div>
+    </div>
+</div>

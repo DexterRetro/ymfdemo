@@ -1,0 +1,12 @@
+<h3 mat-dialog-title>ONLINE PAYMENT IN PROCESS</h3>
+<div mat-dialog-content class="detail">
+    <div class="uploader-status">
+        <mat-spinner></mat-spinner>
+      </div>
+    <h3>Awaiting Payment Completion</h3>
+    <p>Once Completed this dialog will automatically close</p>
+    <p>if you are not automatically redirected to payment site <a [href]="data.RedirectUrl">CLICK HERE!</a></p>
+</div>
+<div mat-dialog-actions>
+  <button class="decline" mat-button mat-dialog-close (click)="DeclineUser()" cdkFocusInitial>Cancel Payment</button>
+</div>
