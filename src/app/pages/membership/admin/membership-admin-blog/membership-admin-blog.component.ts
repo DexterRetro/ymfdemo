@@ -31,7 +31,6 @@ export class MembershipAdminBlogComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.loading=false;
     });
-   
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -49,7 +48,16 @@ export class MembershipAdminBlogComponent implements OnInit {
       return e._id===id;
     });
     if(!blog){return;}
-    this.dialog.open(Articleviewpopup,{data:blog});
+    this.dialog.open(Articleviewpopup,{data:blog}).afterClosed().subscribe(async()=>{
+      this.loading=true;
+      const UnverifiedBlogs = await this.blog.GetUnverifiedBlogs();
+      UnverifiedBlogs.subscribe(response=>{
+      this.dataSource.data = response.Blogs;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.loading=false;
+    });
+    });
 
   }
 
@@ -74,9 +82,12 @@ constructor( public dialogRef: MatDialogRef<UnverifiedBlog>,@Inject(MAT_DIALOG_D
 }
 async ApproveUser(id:String){
   this.processing=true;
-  await this.blogServ.AproveUnverifiedBlogs(id);
-  this.dialogRef.close();
-  this.processing=false;
+  await this.blogServ.AproveUnverifiedBlogs(id).then(ap=>{
+    ap.subscribe(res=>{
+      this.dialogRef.close();
+      this.processing=false;
+    })
+  });
 }
 async DeclineUser(){
   this.processing=true;

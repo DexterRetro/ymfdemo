@@ -1,5 +1,12 @@
-<h1 mat-dialog-title>Cover Image Not Uploaded</h1>
-<div mat-dialog-content>Please Upload Cover Image</div>
-<div mat-dialog-actions>
+<h1 mat-dialog-title>{{getHeader()}}</h1>
+<div mat-dialog-content>
+  <div *ngIf="!isUpload" style="width: 100%; height: 100%; color: red;">
+    Please Upload Cover Image
+  </div>
+  <div *ngIf="isUpload" class="uploader-status">
+    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+  </div>
+</div>
+<div mat-dialog-actions *ngIf="!isUpload">
   <button mat-button mat-dialog-close (click)="onNoClick()">OK</button>
 </div>

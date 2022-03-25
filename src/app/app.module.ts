@@ -43,13 +43,14 @@ import { BlogFullViewComponent } from './pages/blog/blog-full-view/blog-full-vie
 import { ErrorCatchingInterceptor } from './interceptors/error-catching.interceptor';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { MembershipAdminFinancesComponent } from './pages/membership/admin/membership-admin-finances/membership-admin-finances.component';
-import { MembershipBlogComponent } from './pages/membership/membership-nav/membership-blog/membership-blog.component';
+import {MembershipBlogComponent } from './pages/membership/membership-nav/membership-blog/membership-blog.component';
 import { TestpageComponent } from './pages/testpage/testpage.component';
 import { VerifyNewUserpopup } from './templates/VerifyNewUserPopup/VerifyNewUser-popup';
 import { VerifyOldUserpopup } from './templates/VerifyOldUserPopup/VerifyOldUser-popup';
 import { Paymentprocessing } from './templates/paymentProcessing/Payment-processing';
 import { AuthLogInComponent } from './pages/membership/auth-log-in/auth-log-in.component';
 import { GalleryComponent } from './pages/gallery/gallery.component';
+import { BlogUploadPopup } from './templates/BlogUploadPopup/BlogUpload-popup';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { GalleryComponent } from './pages/gallery/gallery.component';
     MembersPopUpPayment,
     AuthLogInComponent,
     Paymentprocessing,
-    GalleryComponent
+    GalleryComponent,
+    BlogUploadPopup
 
   ],
   imports: [

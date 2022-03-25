@@ -11,14 +11,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./membership-blog.component.scss']
 })
 export class MembershipBlogComponent implements OnInit {
-
-  
-  ImbededImages:[{Image:String,ImageFile:any,index:Number}]=[{Image:'',ImageFile:undefined,index:-1}];
-  Captions:[String] =[''];
   blog:BlogPost|any;
   ArticleFile:any;
   loadingBlog=false;
-  CoverPhoto:any;
   CoverPhotoFile:any;
   DocumentBTN='Upload Document';
 
@@ -27,16 +22,17 @@ export class MembershipBlogComponent implements OnInit {
 
   async uploadBlog(event:MouseEvent){
     event.stopPropagation();
-    if(!this.CoverPhoto){
+    if(!this.CoverPhotoFile){
       this.dialog.open(BlogUploadPopup);
       return;
     }
- 
-    const res =await this.BlogServe.UploadBlog(this.blog,this.CoverPhoto,this.ImbededImages,this.Captions);
-    res.subscribe(r=>{
-      
+    const openedDialog = this.dialog.open(BlogUploadPopup,{data:{blog:this.blog}});
+    openedDialog.afterClosed().subscribe(res=>{
+      this.blog = null;
+      this.DocumentBTN='Upload Document';
+      this.ArticleFile=null;
+      window.scrollTo(0, 0);
     })
-
   }
  async onFileChange(event:any){
   if (event.target?.files.length > 0) {
@@ -47,16 +43,12 @@ export class MembershipBlogComponent implements OnInit {
       this.DocumentBTN='Change Document'
       this.blog =res.Blog;
       this.loadingBlog=false;
-      for (let index = 0; index < this.blog.Content.length; index++) {
-        this.ImbededImages[index] ={Image:'',ImageFile:undefined,index:index}
-        this.Captions[index]='';
-      }
     })
   }
  }
 
  updateCaption(event:any,i:any){
-   this.Captions[i]=event.target.value;
+   this.blog.Content[i].PImage.caption=event.target.value;
  }
  getImage(image:any){
    return image.split
@@ -67,19 +59,19 @@ export class MembershipBlogComponent implements OnInit {
     this.CoverPhotoFile = event.target.files[0];
     reader.readAsDataURL(this.CoverPhotoFile);
     reader.onload = () => {
-      this.CoverPhoto = reader.result as string;
+      this.blog.blogPicture = reader.result as string;
     };
   }
  }
  ButtonCoverPhoto(){
-   if(this.CoverPhoto){
+   if(this.blog.blogPicture){
      return 'Change Cover Photo'
    }
    return 'Upload Cover Photo'
  }
 
  InsertPhotoBtn(i:any){
-   if(this.ImbededImages[i]){
+   if(this.blog.Content[i].PImage){
      return 'Change Image';
    }
    return 'Insert Image';
@@ -87,12 +79,15 @@ export class MembershipBlogComponent implements OnInit {
  async ImbedImagesFn(event:any,index:any){
   if (event.target.files.length > 0) {
     const reader = new FileReader();
-    this.ImbededImages[index].ImageFile = event.target.files[0];
-    reader.readAsDataURL(this.ImbededImages[index].ImageFile);
+    reader.readAsDataURL(event.target.files[0]);
     reader.onload = () => {
-      this.ImbededImages[index].Image = reader.result as string;
+      this.blog.Content[index].PImage ={ImbededImg:reader.result as string,caption:''};
     };
   }
+ }
+ async RemoveImagesFn(index:any){
+  this.blog.Content[index].PImage.ImbededImg ='';
+  this.blog.Content[index].PImage.caption ='';
  }
 
  docuLink(){

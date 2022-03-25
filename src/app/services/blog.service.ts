@@ -22,7 +22,7 @@ export class BlogService {
     return Blogs;
   } 
   async AproveUnverifiedBlogs (id:any):Promise<Observable<{message:String}>>{
-    const Blogs = await this.http.post<{message:String}>(`${environment.backendAPIURL}/blog/unverified`,id);
+    const Blogs = await this.http.post<{message:String}>(`${environment.backendAPIURL}/blog/unverified`,{id:id});
     return Blogs;
   } 
 
@@ -30,7 +30,8 @@ export class BlogService {
     if(!imageQuery){
       return ''
     }
-    const formatedQuery = imageQuery.split('/')
+    const formatedQuery = imageQuery.split('/');
+    console.log(formatedQuery)
     const Url = `${environment.backendAPIURL}/file?folder=${formatedQuery[0]}&filename=${formatedQuery[1]}`
     return Url;
   }
@@ -46,11 +47,7 @@ export class BlogService {
     const gallery = await this.http.get<{message:String,images:GalleryModel[]}>(`${environment.backendAPIURL}/gallery`);
     return gallery;
   }
-  async UploadBlog(blog:BlogPost,CoverPhoto:any,ImbededImages:[{Image:String,ImageFile:any,index:Number}],captions:[String]):Promise<Observable<{message:String,Blog:BlogPost}>>{
-    blog.blogPicture=CoverPhoto;
-    for (let index = 0; index < ImbededImages.length; index++) {
-      blog.Content[index].PImage={ImbededImg:ImbededImages[index].Image,caption:captions[index]}
-    }
+  async UploadBlog(blog:BlogPost):Promise<Observable<{message:String,Blog:BlogPost}>>{
     let params = new HttpParams();
 
     const options = {
