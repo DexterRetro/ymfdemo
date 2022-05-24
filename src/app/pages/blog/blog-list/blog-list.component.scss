@@ -13,6 +13,25 @@
       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
   }
+  button{
+    background-color: #ffcd04;
+    color: white;
+  }
+  .magDownloader{
+    margin: auto;
+    width: 500px;
+    height: 250px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    .magSelector{
+      margin: auto;
+    }
+    img{
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
   .ads{
 
     width: 80%;
@@ -220,6 +239,18 @@
     }
   }
 
+}
+@media screen and (max-width:530px){
+  .Main{
+    .magDownloader{
+      height: auto;
+      display: block;
+      .magSelector{
+        margin-bottom: 10px;
+      }
+    }
+  }
+  
 }
 @media screen and (max-width:500px){
   .Main{

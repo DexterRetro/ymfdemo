@@ -1,64 +1,103 @@
 
 <div class="main">
-    <div class="Completed Transactions">
-        <h1>Transactions</h1>
-        <mat-form-field appearance="standard">
-            <mat-label>SEARCH Transactions</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Look for specific Member" #input>
-          </mat-form-field>
-          
-          <div class="loader" *ngIf="loading">
-            <div class="spinner">
-              <div class="rect1"></div>
-              <div class="rect2"></div>
-              <div class="rect3"></div>
-              <div class="rect4"></div>
-              <div class="rect5"></div>
-            </div>
-          </div>
-          <div class="mat-elevation-z8" *ngIf="!loading" style="overflow: auto;">
-            <table mat-table [dataSource]="dataSource" matSort >
-          
-              <!-- ID Column -->
-              <ng-container matColumnDef="YMFID">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-                <td mat-cell *matCellDef="let row"> {{row.YMFID}} </td>
-              </ng-container>
-          
-              <!-- NAME Column -->
-              <ng-container matColumnDef="NAME">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> NAME </th>
-                <td mat-cell *matCellDef="let row"> {{row.userName}} {{row.userSurname}} </td>
-              </ng-container>
-          
-              <!-- PROVINCE Column -->
-              <ng-container matColumnDef="PROVINCE">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Province </th>
-                <td mat-cell *matCellDef="let row"> {{row.Province}} </td>
-              </ng-container>
-          
-              <!-- CONTACTS Column -->
-              <ng-container matColumnDef="CONTACTS">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Contacts </th>
-                <td mat-cell *matCellDef="let row"> PHONE: {{row.phoneNumber}}<br>EMAIL: {{row.email}} </td>
-              </ng-container>
-                <!-- Star Column -->
-              <ng-container matColumnDef="star" stickyEnd>
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element">
-                </td>
-              </ng-container>
-          
-              <tr mat-header-row *matHeaderRowDef="Columns"></tr>
-              <tr mat-row *matRowDef="let row; columns: Columns;"></tr>
-          
-              <!-- Row shown when there is no matching data. -->
-              <tr class="mat-row" *matNoDataRow>
-                <td class="mat-cell" colspan="4">No Members matching "{{input.value}}"</td>
-              </tr>
-            </table>
-          
-            <mat-paginator  [pageSizeOptions]="[10, 20,50]" aria-label="Select page of users"></mat-paginator>
-          </div>
+  <div class="boards">
+   <div class="rateboard">
+     <h1>Exchange Rate</h1>
+     <div class="rateInfo">
+     <div class="rateInfoUSD">
+       <p class="header">USD: </p><p class="sub">1</p>
+     </div>
+     <div class="rateInfoZWL">
+       <p class="header">ZWL: </p><p class="sub">400</p>
+     </div>
+     </div>
+     <p>N.B this is the exchange rate used in conversion of USD prices to ZWL for services offered by YMF</p>
+     <button mat-raised-button (click)="RatePopUp()">CHANGE</button>
     </div>
+   <div class="servicesboard">
+     <div class="subsboard">
+       <h2>SUBSCRIPTIONS</h2>
+       <div class="subInfoHeader">
+        <p>SUB NAME</p>
+        <p>VALID (day)</p>
+        <p>PRICE (usd)</p>
+        <p>PRICE (zwl)</p>
+        <div class="whiteSpace"></div>
+       </div>
+       <div class="window">
+        <div class="info">
+          <p>General</p>
+          <p>30</p>
+          <p>5</p>
+          <p>2000</p>
+          <button mat-button style="color: green;" (click)="ServicePopup()"><i class="far fa-edit"></i></button>
+          <button mat-button style="color: red;" (click)="ApproveAction()"><i class="far fa-trash-alt"></i></button>
+        </div>
+       </div>
+
+     </div>
+     <div class="merchboard">
+      <h2>YMF MERCH</h2>
+      <div class="subInfoHeader">
+       <p>MERCH</p>
+       <p>PRICE (usd)</p>
+       <p>PRICE (zwl)</p>
+       <div class="whiteSpace"></div>
+      </div>
+      <div class="window">
+        <div class="info">
+          <p>PVC Card</p>
+          <p>15</p>
+          <p>6000</p>
+          <button mat-button style="color: green;" (click)="ServicePopup()"><i class="far fa-edit"></i></button>
+          <button mat-button style="color: red;" (click)="ApproveAction()"><i class="far fa-trash-alt"></i></button>
+        </div>
+      </div>
+     </div>
+   </div>
+  </div>
+    <div class="PendingTransactions">
+      <h1>Pending Transactions</h1>
+    <div class="transHeader">
+      <p>Customer Name</p>
+      <p>Date</p>
+      <p>RefCode</p>
+      <p>Amount</p>
+      <p>Pupose</p>
+      <div class="whitespace"></div>
+    </div>
+    <div class="window">
+      <div class="Info">
+        <p>Muwodzeri D</p>
+        <p>13/05/2022</p>
+        <p>zzxyue447u</p>
+        <p>1000</p>
+        <p>Monthly Sub</p>
+        <button mat-button style="color: green;"><i class="fas fa-check"></i></button>
+        <button mat-button style="color: red;" (click)="ApproveAction()"><i class="far fa-trash-alt"></i></button>
+      </div>
+    </div>
+    </div>
+    <div class="CompletedTransactions">
+      <h1>Approved Transactions</h1>
+      <div class="transHeader">
+        <p>Customer Name</p>
+        <p>Date</p>
+        <p>RefCode</p>
+        <p>Amount</p>
+        <p>Pupose</p>
+        <p>Platform</p>
+      </div>
+      <div class="window">
+        <div class="Info">
+          <p>Muwodzeri D</p>
+          <p>13/05/2022</p>
+          <p>zzxyue447u</p>
+          <p>1000</p>
+          <p>Monthly Sub</p>
+          <p>PayNow</p>
+        </div>
+      </div>
+      <button mat-button (click)="AddTransaction()"><p>Add Transaction</p></button>
+  </div>
 </div>

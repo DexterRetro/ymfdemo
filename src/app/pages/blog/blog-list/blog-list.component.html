@@ -2,9 +2,23 @@
   <div class="ads">
     <img src="assets/ymftopAd.png" alt="ad">
   </div>
-  <div *ngIf="blogs.length>0 &&!showLoader" class="header animate__animated animate__fadeIn">
-    <img src="assets/ymfTransAlt.png" alt="">
-    <h1>BLOG</h1>
+  <div class="magDownloader">
+    <form action=""  class="magSelector">
+      <h1>YMF MAGAZINE</h1>
+      <p>Get Your Copy Here</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Select Magazine Issue</mat-label>
+        <mat-select [(value)]="SelectedMag">
+          <mat-option>None</mat-option>
+          <mat-option value="option1">December 2021</mat-option>
+          <mat-option value="option2">February 2022</mat-option>
+          <mat-option value="option3">March 2022</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <button mat-raised-button>Download <i class="fas fa-download"></i></button>
+    </form>
+    <img src="assets/MobileBackGround.jpg" alt="">
   </div>
 <div class="sk-cube-grid" *ngIf="showLoader">
   <div class="sk-cube sk-cube1"></div>

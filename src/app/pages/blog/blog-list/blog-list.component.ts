@@ -9,6 +9,8 @@ import { BlogService } from 'src/app/services/blog.service';
   styleUrls: ['./blog-list.component.scss']
 })
 export class BlogListComponent implements OnInit {
+  MagazineList:any;
+  SelectedMag:any;
   blogs:BlogPost[]=[];
   images:[]=[];
   showLoader=true;

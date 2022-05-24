@@ -1,0 +1,70 @@
+<h3 mat-dialog-title>ADD TRANSACTION</h3>
+<div mat-dialog-content class="detail">
+   <form [formGroup]="TransactionAddForm">
+    <mat-form-field appearance="standard" style="width: 80%">
+      <mat-label>Customer Name</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Doe J"
+        formControlName="customerName"
+      />
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker">
+        <i class="far fa-calendar-alt"></i>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="standard" style="width: 80%">
+      <mat-label>Ref Code</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Reference Code of Transaction"
+        formControlName="'refcode'"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="standard" style="width: 50%">
+      <mat-label>Amount</mat-label>
+      <input
+        matInput
+        type="number"
+        placeholder="Amount payed"
+        formControlName="amount"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="standard" style="width: 20%;margin-left: 20px;">
+      <mat-label>Currency</mat-label>
+      <select matNativeControl formControlName="currency">
+        <option value="" selected>Please Select Currency</option>
+        <option value="USD">USD</option>
+        <option value="ZWL">ZWL</option>
+      </select>
+    </mat-form-field>
+    <mat-form-field appearance="standard" style="width: 80%">
+      <mat-label>Purpose</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Purpose of Payment"
+        formControlName="purpose"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="standard" style="width: 50%">
+      <mat-label>Platform</mat-label>
+      <select matNativeControl formControlName="platform">
+        <option value="" selected></option>
+        <option value="Mukuru">Mukuru</option>
+        <option value="Bank Transfer">Bank Transfer</option>
+      </select>
+    </mat-form-field>
+   </form>
+</div>
+<div mat-dialog-actions>
+  <button class="decline" mat-raised-button style="background-color:green;color: white;" [disabled]="!TransactionAddForm.valid">Add <i class="far fa-plus-square"></i></button>
+  <button class="decline" mat-button mat-dialog-close cdkFocusInitial>Cancel</button>
+</div>

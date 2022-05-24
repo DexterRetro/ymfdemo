@@ -1,0 +1,63 @@
+<h1 mat-dialog-title>Are you sure you want to remove Entry</h1>
+<div mat-dialog-content class="detail">
+  <form action="">
+   <mat-form-field appearance="standard" style="width: 80%">
+     <mat-label>Customer Name</mat-label>
+     <input
+       matInput
+       type="text"
+       placeholder="Doe J"
+       formControlName="ymfid"
+     />
+   </mat-form-field>
+   <mat-form-field class="example-full-width" appearance="fill">
+     <mat-label>Date</mat-label>
+     <input matInput [matDatepicker]="picker">
+     <mat-hint>MM/DD/YYYY</mat-hint>
+     <mat-datepicker-toggle matSuffix [for]="picker">
+       <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+     </mat-datepicker-toggle>
+     <mat-datepicker #picker></mat-datepicker>
+   </mat-form-field>
+   <mat-form-field appearance="standard" style="width: 80%">
+     <mat-label>Ref Code</mat-label>
+     <input
+       matInput
+       type="text"
+       placeholder="Reference Code of Transaction"
+       formControlName="ymfid"
+     />
+   </mat-form-field>
+   <mat-form-field appearance="standard" style="width: 80%">
+     <mat-label>Amount</mat-label>
+     <input
+       matInput
+       type="text"
+       placeholder="Amount payed"
+       formControlName="ymfid"
+     />
+   </mat-form-field>
+   <mat-form-field appearance="standard" style="width: 80%">
+     <mat-label>Purpose</mat-label>
+     <input
+       matInput
+       type="text"
+       placeholder="Purpose of Payment"
+       formControlName="ymfid"
+     />
+   </mat-form-field>
+   <mat-form-field appearance="standard" style="width: 80%">
+     <mat-label>Platform</mat-label>
+     <input
+       matInput
+       type="text"
+       placeholder="Payment Platform Used"
+       formControlName="ymfid"
+     />
+   </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button>Yes</button>
+  <button mat-button  cdkFocusInitial>Cancel</button>
+</div>

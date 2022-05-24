@@ -95,46 +95,33 @@
     </div>
   </div>
   <div class="fright">
-    <div class="rtop" [routerLink]="'/blog/'+blogs[1]._id">
-      <div class="featureTag">Featured</div>
-      <img [src]="getImageUrl(blogs[1].blogPicture)" alt="">
-      <div class="info animate__animated animate__fadeIn">
-        <h2>{{blogs[1].Topic}}</h2>
-        <div class="details">
-          <h4><i class="far fa-edit"></i> {{blogs[1].Author}} <br> <i class="far fa-comment-alt"></i>  {{getCommentCount(1)}}</h4>
-        </div>
-        <p>{{blogs[1].Summary}}</p>
-      </div>
-    </div>
     <div class="rbottom">
-      <div class="rbl" [routerLink]="'/blog/'+blogs[2]._id">
+      <div class="rbl" [routerLink]="'/blog/'+blogs[1]._id">
+        <img [src]="getImageUrl(blogs[1].blogPicture)" alt="">
+        <div class="info animate__animated animate__fadeIn">
+          <h2>{{blogs[1].Topic}}</h2>
+          <p>{{blogs[1].Summary}}</p>
+        </div>
+      </div>
+      <div class="rbr" [routerLink]="'/blog/'+blogs[2]._id">
         <img [src]="getImageUrl(blogs[2].blogPicture)" alt="">
         <div class="info animate__animated animate__fadeIn">
           <h2>{{blogs[2].Topic}}</h2>
           <p>{{blogs[2].Summary}}</p>
         </div>
       </div>
-      <div class="rbr" [routerLink]="'/blog/'+blogs[3]._id">
-        <img [src]="getImageUrl(blogs[3].blogPicture)" alt="">
-        <div class="info animate__animated animate__fadeIn">
-          <h2>{{blogs[3].Topic}}</h2>
-          <p>{{blogs[3].Summary}}</p>
-        </div>
+    </div>
+    <div class="rtop">
+      <div class="featureTag">YMF Gallery</div>
+      <div *ngIf="ImagesSet[currentImageIndex]" class="gallerypicView {{ ChangeImages('show')}} animate__animated animate__fadeIn">
+        <img [src]="getPicUrl(ImagesSet[currentImageIndex]._id)" alt="">
+      </div>
+      <div class="info animate__animated animate__fadeIn" *ngIf="ImagesSet[currentImageIndex].PictureCaption">
+        <p>{{ImagesSet[currentImageIndex].PictureCaption}}</p>
       </div>
     </div>
-    <div></div>
   </div>
 </section>
-<div class="gallery" *ngIf="ImagesSet">
-  <div *ngIf="ImagesSet[currentImageIndex]" class="gallerypicView {{ ChangeImages('show')}} animate__animated animate__fadeIn">
-    <img [src]="getPicUrl(ImagesSet[currentImageIndex]._id)" alt="">
-    <div *ngIf="ImagesSet[currentImageIndex].PictureCaption" class="caption"><p>{{ImagesSet[currentImageIndex].PictureCaption}}</p></div>
-  </div>
-  <div *ngIf="ImagesSet[currentImageIndex]" class="gallerypicViewOut {{ ChangeImages('showout')}} animate__animated animate__fadeOut animate__slow">
-    <img [src]="getPicUrl(ImagesSet[currentImageIndex]._id)" alt="">
-    <div *ngIf="ImagesSet[currentImageIndex].PictureCaption" class="caption"><p>{{ImagesSet[currentImageIndex].PictureCaption}}</p></div>
-  </div>
-</div>
 <div class="Main">
   <h1 class="animate__animated animate__fadeInDown">About YMF</h1>
   <div class="cards">

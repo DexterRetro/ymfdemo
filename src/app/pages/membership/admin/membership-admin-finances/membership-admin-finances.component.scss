@@ -6,4 +6,250 @@
         margin: auto;
         text-align: center;
     }
+    .boards{
+      width: 100%;
+      height: auto;
+      .rateboard{
+        height: 250px;
+        width: 400px;
+        margin: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba($color: #000000, $alpha: 0.5);
+        .rateInfo{
+          width: 100%;
+          .rateInfoUSD,.rateInfoZWL{
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            text-align: center;
+            background-color: rgb(226, 226, 226);
+            border-top: 2px solid rgb(190, 188, 188);
+            border-bottom: 2px solid rgb(184, 184, 184);
+            .header{
+              text-align: right;
+              font-size: 20px;
+              font-weight: bolder;
+            }
+            .sub{
+              text-align: left;
+              font-size: 20px;
+            }
+          }
+        }
+        button{
+          width: 50%;
+          margin: auto;
+          height: 30px;
+          background-color: #ffcd04;
+          color: white;
+        }
+      }
+      .servicesboard{
+        margin-top: 10px;
+        margin-bottom: 10px;
+        height: auto;
+        max-height: 400px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        .subsboard{
+          width: 99%;
+          height: 100%;
+          margin: auto;
+          margin-right: 2%;
+
+          .subInfoHeader
+          {
+            width: 100%;
+            height: auto;
+            display: grid;
+            grid-template-columns: repeat(5,17.5% 17.5% 17.5% 17.5% 30%);
+            text-align: center;
+            background-color: #ffcd04;
+            color: white;
+            border-radius: 7px;
+
+            p{
+              font-size: 10px;
+              width: 95%;
+              margin: auto;
+              margin-right: 5%;
+              font-weight: bolder;
+            }
+            .whiteSpace{
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .window{
+            overflow-y: scroll;
+            overflow-x: hidden;
+            padding-bottom: 10px;
+            .info{
+              width: 100%;
+              height: auto;
+              display: grid;
+              grid-template-columns: repeat(6,17.5% 17.5% 17.5% 17.5% 15% 15%);
+              text-align: center;
+              color: black;
+              p{
+                font-size: 10px;
+                width: 95%;
+                margin: auto;
+                margin-right: 5%;
+                height: 100%;
+              }
+              button{
+                width: 15px;
+                border-radius: 7px;
+              }
+            }
+          }
+
+        }
+        .merchboard{
+          width: 99%;
+          height: 100%;
+          margin: auto;
+          margin-right: 2%;
+          .subInfoHeader
+          {
+            width: 100%;
+            height: auto;
+            display: grid;
+            grid-template-columns: repeat(4,18% 18% 18% 46%);
+            text-align: center;
+            border-radius: 7px;
+          background-color: #ffcd04;
+          color: white;
+            p{
+              font-size: 10px;
+              width: 95%;
+              margin: auto;
+              margin-right: 5%;
+              font-weight: bolder;
+            }
+            .whiteSpace{
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .window{
+            overflow-y: scroll;
+            padding-bottom: 10px;
+            .info{
+              width: 100%;
+              height: auto;
+              display: grid;
+              grid-template-columns: repeat(5,18% 18% 18% 23% 23%);
+              text-align: center;
+              color: black;
+              p{
+                font-size: 10px;
+                width: 95%;
+                margin: auto;
+                margin-right: 5%;
+                height: 100%;
+              }
+              button{
+                width: 15px;
+                border-radius: 7px;
+              }
+            }
+          }
+
+        }
+      }
+    }
+    .PendingTransactions{
+      width: 95%;
+      height: auto;
+      margin: auto;
+      max-height: 500px;
+      margin-bottom: 10px;
+      .transHeader{
+        width: 100%;
+        height: auto;
+        display: grid;
+        grid-template-columns: repeat(6,14% 14% 14% 14% 14% 30%);
+        background-color: #ffcd04;
+        color: white;
+        border-radius: 10px;
+        p{
+          font-weight: bolder;
+          font-size: 12px;
+        }
+      }
+      .window{
+        height: 100%;
+        width: 100%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        .Info{
+        width: 100%;
+        height: auto;
+        display: grid;
+        grid-template-columns: repeat(7,14% 14% 14% 14% 14% 15% 15%);
+        text-align: center;
+        background-color: rgb(235, 233, 233);
+        p{
+          font-size: 12px;
+          width: 95%;
+          margin: auto;
+          margin-right: 5%;
+          height: 100%;
+        }
+        }
+      }
+    }
+    .CompletedTransactions{
+      width: 95%;
+      height: auto;
+      margin: auto;
+      max-height: 500px;
+      margin-bottom: 10px;
+      .transHeader{
+        width: 100%;
+        height: auto;
+        display: grid;
+        grid-template-columns: repeat(6,1fr);
+        background-color: #ffcd04;
+        color: white;
+        border-radius: 10px;
+        p{
+          font-weight: bolder;
+          font-size: 12px;
+        }
+      }
+      .window{
+        height: 100%;
+        width: 100%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        .Info{
+        width: 100%;
+        height: auto;
+        display: grid;
+        grid-template-columns: repeat(6,1fr);
+        text-align: center;
+        background-color: rgb(235, 233, 233);
+        p{
+          font-size: 12px;
+          width: 95%;
+          margin: auto;
+          margin-right: 5%;
+          height: 100%;
+        }
+        }
+      }
+      button{
+        margin-top: 10px;
+        margin-left: 70%;
+        height: 50px;
+        background-color: #ffcd04;
+        p{
+          color: white;
+        }
+        left: 0;
+      }
+    }
 }

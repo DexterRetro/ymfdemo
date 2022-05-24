@@ -12,15 +12,17 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common'
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {MatTabsModule} from '@angular/material/tabs'; 
-import {MatStepperModule} from '@angular/material/stepper'; 
-import {MatRadioModule} from '@angular/material/radio'; 
-import {MatTableModule} from '@angular/material/table'; 
-import {MatPaginatorModule} from '@angular/material/paginator'; 
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -42,7 +44,7 @@ import { BlogListComponent } from './pages/blog/blog-list/blog-list.component';
 import { BlogFullViewComponent } from './pages/blog/blog-full-view/blog-full-view.component';
 import { ErrorCatchingInterceptor } from './interceptors/error-catching.interceptor';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { MembershipAdminFinancesComponent } from './pages/membership/admin/membership-admin-finances/membership-admin-finances.component';
+import { FinanceAddTrans, FinanceAprove, FinanceRate, FinanceService, MembershipAdminFinancesComponent } from './pages/membership/admin/membership-admin-finances/membership-admin-finances.component';
 import {MembershipBlogComponent } from './pages/membership/membership-nav/membership-blog/membership-blog.component';
 import { TestpageComponent } from './pages/testpage/testpage.component';
 import { VerifyNewUserpopup } from './templates/VerifyNewUserPopup/VerifyNewUser-popup';
@@ -78,7 +80,11 @@ import { BlogUploadPopup } from './templates/BlogUploadPopup/BlogUpload-popup';
     AuthLogInComponent,
     Paymentprocessing,
     GalleryComponent,
-    BlogUploadPopup
+    BlogUploadPopup,
+    FinanceAddTrans,
+    FinanceAprove,
+    FinanceRate,
+    FinanceService
 
   ],
   imports: [
@@ -104,8 +110,10 @@ import { BlogUploadPopup } from './templates/BlogUploadPopup/BlogUpload-popup';
     NgxChartsModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
-    ShareModule
-    
+    ShareModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+
   ],
   providers: [
     DatePipe,
