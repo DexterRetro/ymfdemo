@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UsersServiceService } from 'src/app/services/users-service.service';
 
@@ -72,6 +72,7 @@ export class FinanceAddTrans{
 })
 export class FinanceAprove{
 
+
 }
 
 @Component({
@@ -80,7 +81,14 @@ export class FinanceAprove{
   styleUrls: ['./FinanceRatePopup/financeRate.scss'],
 })
 export class FinanceRate{
+  RateForm:FormGroup;
 
+  constructor(fb:FormBuilder){
+   this.RateForm=fb.group(
+     {
+       rate:['',Validators.required],
+    })
+  }
 }
 
 
@@ -90,5 +98,22 @@ export class FinanceRate{
   styleUrls: ['./FinanceServicePopup/financeService.scss'],
 })
 export class FinanceService{
+  MerchForm:FormGroup;
+  SubsForm:FormGroup;
 
+  constructor(private fb:FormBuilder,
+    private dialogRef: MatDialogRef<FinanceService>,
+    @Inject(MAT_DIALOG_DATA) public data: {merch:any,subs:any},){
+   this.MerchForm=fb.group(
+     {
+       merch:['',Validators.required],
+       price:['',Validators.required],
+    });
+    this.SubsForm=fb.group(
+      {
+        subname:['',Validators.required],
+        validity:['',Validators.required],
+        price:['',Validators.required]
+    })
+  }
 }

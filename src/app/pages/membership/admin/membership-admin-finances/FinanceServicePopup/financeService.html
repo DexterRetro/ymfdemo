@@ -1,63 +1,57 @@
-<h1 mat-dialog-title>Are you sure you want to remove Entry</h1>
-<div mat-dialog-content class="detail">
-  <form action="">
+<h1 mat-dialog-title>YMF MERCH</h1>
+<div mat-dialog-content>
+  <form [formGroup]="SubsForm" class="Subscriptions" *ngIf="data.subs">
    <mat-form-field appearance="standard" style="width: 80%">
-     <mat-label>Customer Name</mat-label>
+     <mat-label>Subscription Name</mat-label>
      <input
        matInput
        type="text"
-       placeholder="Doe J"
-       formControlName="ymfid"
+       placeholder="Cooperate Subscription"
+       formControlName="subname"
      />
    </mat-form-field>
-   <mat-form-field class="example-full-width" appearance="fill">
-     <mat-label>Date</mat-label>
-     <input matInput [matDatepicker]="picker">
-     <mat-hint>MM/DD/YYYY</mat-hint>
-     <mat-datepicker-toggle matSuffix [for]="picker">
-       <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-     </mat-datepicker-toggle>
-     <mat-datepicker #picker></mat-datepicker>
-   </mat-form-field>
-   <mat-form-field appearance="standard" style="width: 80%">
-     <mat-label>Ref Code</mat-label>
+   <mat-form-field appearance="standard" style="width: 40%">
+     <mat-label>Validity (in Days)</mat-label>
      <input
        matInput
-       type="text"
-       placeholder="Reference Code of Transaction"
-       formControlName="ymfid"
+       type="number"
+       placeholder="30"
+       formControlName="validity"
      />
    </mat-form-field>
-   <mat-form-field appearance="standard" style="width: 80%">
-     <mat-label>Amount</mat-label>
+   <br>
+   <mat-form-field appearance="standard" style="width: 40%">
+     <mat-label>Price in USD</mat-label>
      <input
        matInput
-       type="text"
-       placeholder="Amount payed"
-       formControlName="ymfid"
-     />
-   </mat-form-field>
-   <mat-form-field appearance="standard" style="width: 80%">
-     <mat-label>Purpose</mat-label>
-     <input
-       matInput
-       type="text"
-       placeholder="Purpose of Payment"
-       formControlName="ymfid"
-     />
-   </mat-form-field>
-   <mat-form-field appearance="standard" style="width: 80%">
-     <mat-label>Platform</mat-label>
-     <input
-       matInput
-       type="text"
-       placeholder="Payment Platform Used"
-       formControlName="ymfid"
+       type="number"
+       placeholder="50"
+       formControlName="price"
      />
    </mat-form-field>
   </form>
+  <form [formGroup]="MerchForm" class="Merch" *ngIf="data.merch">
+    <mat-form-field appearance="standard" style="width: 80%">
+      <mat-label>Merch Name</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Cooperate Subscription"
+        formControlName="merch"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="standard" style="width: 40%">
+      <mat-label>Price in USD</mat-label>
+      <input
+        matInput
+        type="number"
+        placeholder="50"
+        formControlName="price"
+      />
+    </mat-form-field>
+   </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button>Yes</button>
+  <button mat-button>ADD</button>
   <button mat-button  cdkFocusInitial>Cancel</button>
 </div>
