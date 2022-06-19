@@ -50,19 +50,36 @@
       </tr>
     </table>
 
-    <mat-paginator  [pageSizeOptions]="[10, 20,50]" aria-label="Select page of users"></mat-paginator>
+    <mat-paginator  [pageSizeOptions]="[10, 20,50]" aria-label="Select page of Articles"></mat-paginator>
   </div>
 
   <h1>Manage Magazines</h1>
-<p>Upload and Delete Articles that can be shown on the website here</p>
+<p>Upload and Delete Downloadable Magazine Documents here</p>
+<input *ngIf="!Uploading"
+id="input-file-id" hidden
+type="file"
+accept=".pdf"
+(change)="onFileChange($event)"/>
+<label *ngIf="!Uploading" for="input-file-id" class="documentUpload"><p>Upload Magazine</p> <i class="fas fa-file-upload"></i></label>
+<br>
+<div class="sk-chase" *ngIf="Uploading">
+<div class="sk-chase-dot"></div>
+<div class="sk-chase-dot"></div>
+<div class="sk-chase-dot"></div>
+<div class="sk-chase-dot"></div>
+<div class="sk-chase-dot"></div>
+<div class="sk-chase-dot"></div>
+</div>
+<h3 *ngIf="Uploading">Uploading Document....</h3>
+<div class="mainMagList" *ngIf="!Uploading">
+  <div class="magInfo" *ngFor="let mag of magazines">
+    <img src="assets/magIcon.jpg" alt="">
+    <div class="MagInfoTxt">
+      <h2>{{mag.MagName}}</h2>
+      <p> Uploaded On: {{mag.UploadDate| date}} </p>
+      <button (click)="deleteMag(mag._id)" mat-raised-button>Delete</button>
+    </div>
+  </div>
 
-<h1>Coming Soon!</h1>
-<!--
-<mat-selection-list #magz [multiple]="false">
-  <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
-    <img src="" alt="">
-    <div mat-line>{{folder.name}}</div>
-    <div mat-line> {{folder.updated | date}} </div>
-  </mat-list-option>
-</mat-selection-list>
--->
+</div>
+

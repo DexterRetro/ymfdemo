@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BlogPost } from '../models/blog-post';
 import { GalleryModel } from '../models/gallery';
+import { MagazineItem } from '../models/ymfMag';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class BlogService {
     return Blogs;
   }
 
-  getImageURL(imageQuery:String){
+  getFileWithURL(imageQuery:String){
     if(!imageQuery){
       return ''
     }
@@ -29,7 +30,9 @@ export class BlogService {
     const Url = `${environment.backendAPIURL}/file?folder=${formatedQuery[0]}&filename=${formatedQuery[1]}`
     return Url;
   }
-  getImageURLwithId(imageQuery:String){
+
+
+  getFileWithId(imageQuery:String){
     if(!imageQuery){
       return ''
     }
@@ -76,8 +79,36 @@ export class BlogService {
   }
 
   async DeleteBlog(id:any){
-    const Blog = await this.http.delete(`${environment.backendAPIURL}/blog`,id);
+    const Blog = await this.http.delete(`${environment.backendAPIURL}/blog/${id}`);
     return Blog;
+  }
+
+  async UploadMagazineDocument(MagazineDocument:any):Promise<Observable<{message:String}>>{
+    let formData = new FormData();
+    formData.append('upload', MagazineDocument,);
+
+    let params = new HttpParams();
+
+    const options = {
+      params: params,
+      reportProgress: true,
+    };
+    const Blog = await this.http.post<{message:String}>(`${environment.backendAPIURL}/blog/magazine`,formData,options);
+    return Blog;
+  }
+  async DeleteMagazine(id:any){
+    const Blog = await this.http.delete(`${environment.backendAPIURL}/blog/magazine/${id}`);
+    return Blog;
+  }
+
+  async GetMagazine ():Promise<Observable<{message:String,magazines:MagazineItem[]}>>{
+    const Blogs = await this.http.get<{message:String,magazines:MagazineItem[]}>(`${environment.backendAPIURL}/blog/magazine`);
+    return Blogs;
+  }
+
+  async DownloadMagazine (Url:String):Promise<Observable<{}>>{
+    const Blogs = await this.http.get<{}>(Url.toString());
+    return Blogs;
   }
 
 }

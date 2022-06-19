@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { BlogPost } from 'src/app/models/blog-post';
+import { MagazineItem } from 'src/app/models/ymfMag';
 import { BlogService } from 'src/app/services/blog.service';
 import { UsersServiceService } from 'src/app/services/users-service.service';
 
@@ -14,13 +15,24 @@ import { UsersServiceService } from 'src/app/services/users-service.service';
   styleUrls: ['./membership-admin-blog.component.scss']
 })
 export class MembershipAdminBlogComponent implements OnInit {
+
   loading = true;
+  Uploading=false;
   Headers: string[] = ['Author', 'Title', 'Upload Date','Status',];
   dataSource: MatTableDataSource<BlogPost> | any;
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
 
-  constructor(private blog:BlogService,private dialog:MatDialog){}
+  magazines:MagazineItem[]=[];
+
+  constructor(private blog:BlogService,private dialog:MatDialog){
+    blog.GetMagazine().then(res=>{
+      res.subscribe(mag=>{
+        console.log(mag);
+       this.magazines=mag.magazines;
+      })
+    })
+  }
   ngOnInit(): void {}
   async ngAfterViewInit() {
     const UnverifiedBlogs = await this.blog.GetBlogs();
@@ -38,6 +50,29 @@ export class MembershipAdminBlogComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+ async onFileChange(event:any){
+  if (event.target?.files.length > 0) {
+    const file = event.target.files[0];
+    this.Uploading=true;
+    const deconstructedWord = await this.blog.UploadMagazineDocument(file);
+    deconstructedWord.subscribe(res=>{
+      this.Uploading=false;
+      this.blog.GetMagazine().then(res=>{
+        res.subscribe(mag=>{
+         this.magazines=mag.magazines;
+        })
+      })
+    })
+  }
+ }
+
+  deleteMag(id:any){
+    this.blog.DeleteMagazine(id).then(r=>{
+      r.subscribe(res=>{
+      })
+    })
   }
   getFormatedDate(date:string):String{
     return date.split('T')[0];
@@ -98,7 +133,7 @@ async DeclineUser(id:String){
   });
 }
 getImage(pic:any){
-  return this.blogServ.getImageURL(pic);
+  return this.blogServ.getFileWithURL(pic);
 }
 
 

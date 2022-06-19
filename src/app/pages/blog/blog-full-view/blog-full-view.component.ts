@@ -71,7 +71,7 @@ export class BlogFullViewComponent implements OnInit {
     return date.split('T')[0];
   }
   getImage(pic:any){
-    return this.blogServ.getImageURL(pic);
+    return this.blogServ.getFileWithURL(pic);
   }
   async commentOnBlog(){
     this.blogServ.CommentOnBlog(this.blog._id,this.commentForm?.value).then(b=>{
