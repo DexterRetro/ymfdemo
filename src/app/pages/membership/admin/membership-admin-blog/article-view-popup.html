@@ -13,8 +13,8 @@
     </div>
   </div>
   <div  mat-dialog-actions *ngIf="!processing">
-    <button style="background-color: green; color: white;" mat-button mat-dialog-close (click)="ApproveUser(data._id)">Approve</button>
-    <button style="background-color: red; color: white;" mat-button mat-dialog-close (click)="DeclineUser()">Decline</button>
+    <button *ngIf="data.Status==='awaiting verification'" style="background-color: green; color: white;" mat-button mat-dialog-close (click)="ApproveUser(data._id)">Approve</button>
+    <button style="background-color: red; color: white;" mat-button mat-dialog-close (click)="DeclineUser(data._id)">Delete</button>
   </div>
   <div class="uploader-status" *ngIf="processing">
     <mat-spinner></mat-spinner>

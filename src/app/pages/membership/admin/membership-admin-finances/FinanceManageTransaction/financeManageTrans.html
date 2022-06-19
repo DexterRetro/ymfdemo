@@ -1,0 +1,31 @@
+<h3 mat-dialog-title>MANAGE TRANSACTION</h3>
+<div mat-dialog-content class="detail">
+  <p *ngIf="!loading">What Action would you like to do on Transaction?</p>
+  <div *ngIf="!loading">
+    <h2>TRANSACTION DETAILS</h2>
+    <h4>CUSTOMER:</h4>
+    <p>{{data.transaction.customer}}</p>
+    <h4>AMOUNT:</h4>
+    <p>{{data.transaction.amount}} {{data.transaction.currency}}</p>
+    <h4>REFFERENCE CODE:</h4>
+    <p>{{data.transaction.refcode}}</p>
+    <h4>PAYMENT PLATFORM USED:</h4>
+    <p>{{data.transaction.paymentPlatform}}</p>
+    <h4>PURPOSE OF PAYMENT:</h4>
+    <p>{{data.transaction.purpose}}</p>
+    <h4>STATUS:</h4>
+    <p>{{data.transaction.status}}</p>
+    <h4>DATE OF PAYMENT:</h4>
+    <p>{{formartDate(data.transaction.date)}}</p>
+    <h4>CONTACTS:</h4>
+    <p>{{data.transaction.contacts}}</p>
+  </div>
+  <mat-spinner class="uploader-status" *ngIf="loading"></mat-spinner>
+   <p *ngIf="loading">Please Wait....</p>
+</div>
+<div mat-dialog-actions>
+  <button (click)="AprroveTrans()" *ngIf="data.transaction.status==='pending'" class="decline" mat-raised-button style="background-color:green;color: white;" [disabled]="loading">APPROVE</button>
+  <button (click)="AprroveTrans()" *ngIf="data.transaction.status==='removed'" class="decline" mat-raised-button style="background-color:green;color: white;" [disabled]="loading">RESTORE</button>
+  <button (click)="DeleteTransaction()" *ngIf="data.transaction.status!=='removed'" class="decline" mat-raised-button style="background-color:red;color: white;" [disabled]="loading">DELETE</button>
+  <button (click)="Close()" class="decline" mat-button mat-dialog-close cdkFocusInitial [disabled]="loading">Cancel</button>
+</div>

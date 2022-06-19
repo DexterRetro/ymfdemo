@@ -1,57 +1,40 @@
-<h1 mat-dialog-title>YMF MERCH</h1>
+<h1 mat-dialog-title>YMF Services</h1>
 <div mat-dialog-content>
-  <form [formGroup]="SubsForm" class="Subscriptions" *ngIf="data.subs">
-   <mat-form-field appearance="standard" style="width: 80%">
-     <mat-label>Subscription Name</mat-label>
+  <mat-spinner class="uploader-status" *ngIf="loading"></mat-spinner>
+  <p *ngIf="loading">Please Wait....</p>
+  <form [formGroup]="ItemForm" class="Subscriptions" *ngIf="!loading">
+   <mat-form-field appearance="standard" style="width: 80%;min-width: 300px;">
+     <mat-label>Item Name</mat-label>
      <input
        matInput
        type="text"
-       placeholder="Cooperate Subscription"
-       formControlName="subname"
-     />
-   </mat-form-field>
-   <mat-form-field appearance="standard" style="width: 40%">
-     <mat-label>Validity (in Days)</mat-label>
-     <input
-       matInput
-       type="number"
-       placeholder="30"
-       formControlName="validity"
+       placeholder="Name of Service Ex. Monthly Sub"
+       formControlName="ItemName"
      />
    </mat-form-field>
    <br>
-   <mat-form-field appearance="standard" style="width: 40%">
+   <mat-form-field appearance="standard" style="width: 60%">
+    <mat-label>Type of Service</mat-label>
+    <select matNativeControl formControlName="ItemType">
+      <option value="" selected>Please Select Type of Service</option>
+      <option value="membership">Membership</option>
+      <option value="payments">Payments</option>
+      <option value="merch">Merch</option>
+    </select>
+  </mat-form-field>
+   <br>
+   <mat-form-field appearance="standard" style="width: 60%">
      <mat-label>Price in USD</mat-label>
      <input
        matInput
        type="number"
        placeholder="50"
-       formControlName="price"
+       formControlName="ItemPrice"
      />
    </mat-form-field>
   </form>
-  <form [formGroup]="MerchForm" class="Merch" *ngIf="data.merch">
-    <mat-form-field appearance="standard" style="width: 80%">
-      <mat-label>Merch Name</mat-label>
-      <input
-        matInput
-        type="text"
-        placeholder="Cooperate Subscription"
-        formControlName="merch"
-      />
-    </mat-form-field>
-    <mat-form-field appearance="standard" style="width: 40%">
-      <mat-label>Price in USD</mat-label>
-      <input
-        matInput
-        type="number"
-        placeholder="50"
-        formControlName="price"
-      />
-    </mat-form-field>
-   </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button>ADD</button>
-  <button mat-button  cdkFocusInitial>Cancel</button>
+  <button (click)="AddItem()" mat-raised-button [disabled]="!ItemForm.valid||loading">ADD</button>
+  <button mat-button (click)="Close()">Cancel</button>
 </div>

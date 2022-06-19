@@ -8,7 +8,7 @@
        <p class="header">USD: </p><p class="sub">1</p>
      </div>
      <div class="rateInfoZWL">
-       <p class="header">ZWL: </p><p class="sub">400</p>
+       <p class="header">ZWL: </p><p class="sub">{{rate}}</p>
      </div>
      </div>
      <p>N.B this is the exchange rate used in conversion of USD prices to ZWL for services offered by YMF</p>
@@ -16,25 +16,21 @@
     </div>
    <div class="servicesboard">
      <div class="subsboard">
-       <h2>SUBSCRIPTIONS</h2>
+       <h2>SUBSCRIPTIONS AND PAYMENTS</h2>
        <div class="subInfoHeader">
-        <p>SUB NAME</p>
-        <p>VALID (day)</p>
+        <p>NAME</p>
         <p>PRICE (usd)</p>
         <p>PRICE (zwl)</p>
         <div class="whiteSpace"></div>
        </div>
        <div class="window">
-        <div class="info">
-          <p>General</p>
-          <p>30</p>
-          <p>5</p>
-          <p>2000</p>
-          <button mat-button style="color: green;" (click)="ServicePopup()"><i class="far fa-edit"></i></button>
-          <button mat-button style="color: red;" (click)="ApproveAction()"><i class="far fa-trash-alt"></i></button>
+        <div *ngFor="let item of subs" class="info">
+          <p>{{item.ItemName}}</p>
+          <p>{{item.ItemPrice}}</p>
+          <p>{{CalculateZWLPrices(item.ItemPrice)}}</p>
+          <button mat-button style="color: red;" (click)="ApproveAction(item._id)"><i class="far fa-trash-alt"></i></button>
         </div>
        </div>
-       <button mat-raised-button style="background-color:#ffcd04; color:white;" (click)="ServicePopup()">ADD SUBSCRIPTION</button>
      </div>
      <div class="merchboard">
       <h2>YMF MERCH</h2>
@@ -45,17 +41,16 @@
        <div class="whiteSpace"></div>
       </div>
       <div class="window">
-        <div class="info">
-          <p>PVC Card</p>
-          <p>15</p>
-          <p>6000</p>
-          <button mat-button style="color: green;" (click)="ServicePopup()"><i class="far fa-edit"></i></button>
-          <button mat-button style="color: red;" (click)="ApproveAction()"><i class="far fa-trash-alt"></i></button>
+        <div *ngFor="let item of merch" class="info">
+          <p>{{item.ItemName}}</p>
+          <p>{{item.ItemPrice}}</p>
+          <p>{{CalculateZWLPrices(item.ItemPrice)}}</p>
+          <button mat-button style="color: red;" (click)="ApproveAction(item._id)"><i class="far fa-trash-alt"></i></button>
         </div>
       </div>
-      <button mat-raised-button style="background-color:#ffcd04; color:white;" (click)="ServicePopup()">ADD MERCH</button>
      </div>
    </div>
+   <button mat-raised-button style="background-color:#ffcd04; color:white;" (click)="ServicePopup()">ADD PAYMENT or MERCH</button>
   </div>
     <div class="PendingTransactions">
       <h1>Pending Transactions</h1>
@@ -65,17 +60,15 @@
       <p>RefCode</p>
       <p>Amount</p>
       <p>Pupose</p>
-      <div class="whitespace"></div>
     </div>
-    <div class="window">
-      <div class="Info">
-        <p>Muwodzeri D</p>
-        <p>13/05/2022</p>
-        <p>zzxyue447u</p>
-        <p>1000</p>
-        <p>Monthly Sub</p>
-        <button mat-button style="color: green;"><i class="fas fa-check"></i></button>
-        <button mat-button style="color: red;" (click)="ApproveAction()"><i class="far fa-trash-alt"></i></button>
+    <div class="window" style="background-color: rgb(207, 205, 205);">
+      <p style="width:100% ;text-align: center;" *ngIf="PendingTransactions.length<1">No pending transactions at the moment</p>
+      <div style="border-bottom: 2px solid black;" *ngFor="let item of PendingTransactions" class="Info" (click)="ManageTransaction(item)">
+        <p>{{item.customer}}</p>
+        <p>{{formartDate(item.date)}}</p>
+        <p>{{item.refcode}}</p>
+        <p>{{item.amount}}</p>
+        <p>{{item.purpose}}</p>
       </div>
     </div>
     </div>
@@ -89,14 +82,15 @@
         <p>Pupose</p>
         <p>Platform</p>
       </div>
-      <div class="window">
-        <div class="Info">
-          <p>Muwodzeri D</p>
-          <p>13/05/2022</p>
-          <p>zzxyue447u</p>
-          <p>1000</p>
-          <p>Monthly Sub</p>
-          <p>PayNow</p>
+      <div class="window" style="background-color: rgb(209, 208, 208);">
+        <p style="width:100% ;text-align: center;" *ngIf="CompletedTransactions.length<1">No pending transactions at the moment</p>
+        <div style="border-bottom: 2px solid black;" [style]="SetColor(item.status)" *ngFor="let item of CompletedTransactions" class="Info" (click)="ManageTransaction(item)">
+          <p>{{item.customer}}</p>
+          <p>{{formartDate(item.date)}}</p>
+          <p>{{item.refcode}}</p>
+          <p>{{item.amount}}</p>
+          <p>{{item.purpose}}</p>
+          <p>{{item.paymentPlatform}}</p>
         </div>
       </div>
       <button mat-button (click)="AddTransaction()"> <p>Add Transaction</p> </button>

@@ -50,7 +50,7 @@
     <router-outlet></router-outlet>
   </div>
   <div class="InfoPanel" *ngIf="IfHome()">
-    <div class="notifications animate__animated animate__fadeInRight">
+    <div *ngIf="UserNotifications.length>0" class="notifications animate__animated animate__fadeInRight">
       <h4>NOTIFICATIONS <i class="fas fa-bell"></i></h4>
       <div class="notification" *ngFor="let item of UserNotifications">
         <h5>{{item.NotHeader}}</h5>
@@ -80,7 +80,7 @@
           PAY NOW
         </button>
       </div>
-      <button mat-raised-button style="color: white; background-color: #ffcd04; width: 200px; margin: auto;" 
+      <button mat-raised-button style="color: white; background-color: #ffcd04; width: 200px; margin: auto;"
       (click)="OpenPaymentDialog()">
         UPLOAD PAYMENT
       </button>

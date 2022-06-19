@@ -14,7 +14,6 @@ export class MembershipSignUpComponent implements OnInit {
   userRegForm:FormGroup |any;
   payNowForm:FormGroup |any;
   PayedForm:FormGroup |any;
-  otherForm:FormGroup |any;
   PictureName='';
   imageSrc='';
   SelectedPayment:any;
@@ -66,17 +65,13 @@ export class MembershipSignUpComponent implements OnInit {
       idPicSource:['',Validators.required]
     })
     this.payNowForm = this.fb.group({
-      cart:['',Validators.required],
+      cart:['reg',Validators.required],
     })
     this.PayedForm= this.fb.group({
       payment:['',Validators.required],
       refCode:['',Validators.required]
     });
-    this.otherForm= this.fb.group({
-      payment:['',Validators.required],
-      refCode:['',Validators.required]
-    })
-    
+
   }
 
   async SignUp() {
@@ -97,9 +92,6 @@ export class MembershipSignUpComponent implements OnInit {
       case 'paynow':
         User.PayNowcart = this.payNowForm.controls['cart'].value
       break;
-      case 'other':
-        User.OtherPayments = this.otherForm.value;
-        break;
       case 'payed':
         User.OtherPayments = this.PayedForm.value;
         break;
@@ -107,7 +99,7 @@ export class MembershipSignUpComponent implements OnInit {
     await this.userAuth.SignUp(User);
      this.SigningUp=false;
   }
-  
+
   async Register(){
     this.SigningUp = true;
     const RegUser = {
@@ -121,8 +113,8 @@ export class MembershipSignUpComponent implements OnInit {
     await this.userAuth.Register(RegUser);
     this.SigningUp=false;
   }
-  
-  
+
+
   getFileName(){
     if(this.PictureName===''){
       return `no picture uploaded`
@@ -151,19 +143,19 @@ export class MembershipSignUpComponent implements OnInit {
       reader.onload = () => {
         this.imageSrc = reader.result as string;
         this.userRegForm.patchValue({
-          idPicSource: reader.result 
+          idPicSource: reader.result
         });
       };
       this.PictureName =file.name;
     }else{
       this.PictureName='';
     }
-    
+
   }
-   checkPasswords: ValidatorFn =  (group: AbstractControl):  ValidationErrors | null => { 
+   checkPasswords: ValidatorFn =  (group: AbstractControl):  ValidationErrors | null => {
     let pass = group.get('password')?.value;
     let confirmPass = group.get('passwordConfirm')?.value
     return pass === confirmPass ? null : { notSame: true }
   }
-  
+
 }

@@ -123,7 +123,7 @@
               <button mat-raised-button matStepperNext>
                Next
               </button>
-              
+
             </form>
           </mat-step>
           <mat-step>
@@ -133,19 +133,11 @@
             <mat-radio-group aria-labelledby="payOptions-group-label"
               class="example-radio-group"
               [(ngModel)]="SelectedPayment">
-              <mat-radio-button class="radio-button" value="paynow"> 
+              <mat-radio-button class="radio-button" value="paynow">
                 <img style="width: 100%; " src="assets/Paynow_Dark.svg" alt="PayNow Options">
-                <form [formGroup]="payNowForm" novalidate *ngIf="(SelectedPayment==='paynow')">
-                  <label >Select Registration Fee</label><br>
-                  <mat-form-field appearance="standard">
-                    <mat-label>Fees</mat-label>
-                    <mat-select formControlName="cart">
-                      <mat-option value="regOnly">Registraion fee Only $15usd</mat-option>
-                      <mat-option value="regWithID">Registration with PVC card $25usd</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <br>
-                  <button [disabled]="!payNowForm.valid" mat-button *ngIf="!SigningUp" type="submit" (click)="SignUp()">PAY NOW</button>
+                <br>
+                <div *ngIf="(SelectedPayment==='paynow')">
+                  <button [disabled]="!payNowForm.valid" mat-button *ngIf="!SigningUp" (click)="SignUp()">Go to Paynow</button>
                   <div class="sk-chase" *ngIf="SigningUp">
                     <div class="sk-chase-dot"></div>
                     <div class="sk-chase-dot"></div>
@@ -154,22 +146,27 @@
                     <div class="sk-chase-dot"></div>
                     <div class="sk-chase-dot"></div>
                   </div>
-                </form>
+                </div>
+
               </mat-radio-button>
-              <mat-radio-button class="radio-button" value="other"> 
-                <img style="width: 100%; " src="assets/innMkuruPay.png" alt="PayNow Options">
-                <form [formGroup]="otherForm" novalidate *ngIf="(SelectedPayment==='other')">
-                  <label >Select Payment Platform</label><br>
+              <mat-radio-button class="radio-button" value="payed">
+                <img style="width: 100%; " src="assets/innMkuruPay.png" alt="Payment Proof Options">
+                <form [formGroup]="PayedForm" novalidate *ngIf="(SelectedPayment==='payed')">
+                  <label >Upload Payment Proof</label><br>
                   <mat-form-field appearance="standard">
                     <mat-label>Payment Platform</mat-label>
                     <mat-select formControlName="payment">
                       <mat-option value="mkuru">MKURU</mat-option>
-                      <mat-option value="innbucks">INN BUCKS</mat-option>
+                      <mat-option value="ecocash">ECOCASH</mat-option>
+                      <mat-option value="oneMoney">ONEMONEY</mat-option>
+                      <mat-option value="BankTransfer">BANK TRANSFER</mat-option>
+                      <mat-option value="MasterCard">MASTERCARD</mat-option>
+                      <mat-option value="Visa">VISA</mat-option>
                     </mat-select>
                   </mat-form-field>
                   <br>
                   <mat-form-field appearance="standard" style="width: 80%">
-                    <mat-label>Payment Confirmation Code</mat-label>
+                    <mat-label>Payment Reference Code</mat-label>
                     <input
                       type="text"
                       matInput
@@ -179,43 +176,7 @@
                   </mat-form-field>
                   <br>
                   <p style="color: red;">*Please Make Payment First then<br>Enter RefCode of transaction.</p>
-                  <p>Payments to be made to 0771234568</p>
-                  <button [disabled]="!otherForm.valid" mat-button *ngIf="!SigningUp" (click)="SignUp()">SIGNUP</button>
-                  <div class="sk-chase" *ngIf="SigningUp">
-                    <div class="sk-chase-dot"></div>
-                    <div class="sk-chase-dot"></div>
-                    <div class="sk-chase-dot"></div>
-                    <div class="sk-chase-dot"></div>
-                    <div class="sk-chase-dot"></div>
-                    <div class="sk-chase-dot"></div>
-                  </div>
-                </form>
-              </mat-radio-button>
-              <mat-radio-button class="radio-button" value="payed"> 
-                <img style="width: 100%; " src="assets/alreadyPayedBTN.png" alt="PayNow Options">
-                <form [formGroup]="PayedForm" novalidate *ngIf="(SelectedPayment==='payed')">
-                  <label >Select Payment Platform <br> Where You Made Payment</label><br>
-                  <mat-form-field appearance="standard">
-                    <mat-label>Payment Platform</mat-label>
-                    <mat-select formControlName="payment">
-                      <mat-option value="ecocash">ECOCASH</mat-option>
-                      <mat-option value="oneMoney">ONEMONEY</mat-option>
-                      <mat-option value="BankTransfer">BANKTRANSFER</mat-option>
-                      <mat-option value="MasterCard">MASTERCARD</mat-option>
-                      <mat-option value="Visa">VISA</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <br>
-                  <mat-form-field appearance="standard" style="width: 80%">
-                    <mat-label>Payment Confirmation Code</mat-label>
-                    <input
-                      type="text"
-                      matInput
-                      placeholder="REF CODE"
-                      formControlName="refCode"
-                    />
-                  </mat-form-field>
-                  <br>
+                  <p>For full Payment Details WhatsApp, SMS, or Call 0771234568</p>
                   <button [disabled]="!PayedForm.valid" mat-button *ngIf="!SigningUp" (click)="SignUp()">SIGNUP</button>
                   <div class="sk-chase" *ngIf="SigningUp">
                     <div class="sk-chase-dot"></div>
@@ -261,7 +222,7 @@
           <input
             id="input-file-id" hidden
             type="file"
-            formControlName="idPic" 
+            formControlName="idPic"
             (change)="onFileChange($event)"/>
           <label for="input-file-id" class="IdPicUpload">Upload National ID Picture</label>
           <br>

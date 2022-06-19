@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { UnverifiedBlog } from 'src/app/models/unverifiedBlog';
+import { BlogPost } from 'src/app/models/blog-post';
 import { BlogService } from 'src/app/services/blog.service';
 import { UsersServiceService } from 'src/app/services/users-service.service';
 
@@ -15,16 +15,15 @@ import { UsersServiceService } from 'src/app/services/users-service.service';
 })
 export class MembershipAdminBlogComponent implements OnInit {
   loading = true;
-  Headers: string[] = ['Author', 'Title', 'Upload Date',];
-  dataSource: MatTableDataSource<UnverifiedBlog> | any;
+  Headers: string[] = ['Author', 'Title', 'Upload Date','Status',];
+  dataSource: MatTableDataSource<BlogPost> | any;
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
-
 
   constructor(private blog:BlogService,private dialog:MatDialog){}
   ngOnInit(): void {}
   async ngAfterViewInit() {
-    const UnverifiedBlogs = await this.blog.GetUnverifiedBlogs();
+    const UnverifiedBlogs = await this.blog.GetBlogs();
     UnverifiedBlogs.subscribe(response=>{
       this.dataSource = new MatTableDataSource(response.Blogs);
       this.dataSource.paginator = this.paginator;
@@ -44,13 +43,13 @@ export class MembershipAdminBlogComponent implements OnInit {
     return date.split('T')[0];
   }
   viewUnverifiedBlog(id:any){
-    const blog = this.dataSource.data.find((e:UnverifiedBlog)=>{
+    const blog = this.dataSource.data.find((e:BlogPost)=>{
       return e._id===id;
     });
     if(!blog){return;}
     this.dialog.open(Articleviewpopup,{data:blog}).afterClosed().subscribe(async()=>{
       this.loading=true;
-      const UnverifiedBlogs = await this.blog.GetUnverifiedBlogs();
+      const UnverifiedBlogs = await this.blog.GetBlogs();
       UnverifiedBlogs.subscribe(response=>{
       this.dataSource.data = response.Blogs;
       this.dataSource.paginator = this.paginator;
@@ -71,7 +70,7 @@ export class MembershipAdminBlogComponent implements OnInit {
 export class Articleviewpopup {
 
 processing=false;
-constructor( public dialogRef: MatDialogRef<UnverifiedBlog>,@Inject(MAT_DIALOG_DATA) public data: any,
+constructor( public dialogRef: MatDialogRef<BlogPost>,@Inject(MAT_DIALOG_DATA) public data: any,
             private blogServ:BlogService,private Auth:UsersServiceService,private router:Router)
 {
   if(this.Auth.user?.role!==('admin')&&
@@ -89,10 +88,14 @@ async ApproveUser(id:String){
     })
   });
 }
-async DeclineUser(){
+async DeclineUser(id:String){
   this.processing=true;
-  this.dialogRef.close();
-  this.processing=false;
+  await this.blogServ.DeleteBlog(id).then(ap=>{
+    ap.subscribe(res=>{
+      this.dialogRef.close();
+      this.processing=false;
+    })
+  });
 }
 getImage(pic:any){
   return this.blogServ.getImageURL(pic);

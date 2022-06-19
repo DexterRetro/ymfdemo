@@ -62,7 +62,7 @@
             width: 100%;
             height: auto;
             display: grid;
-            grid-template-columns: repeat(5,17.5% 17.5% 17.5% 17.5% 30%);
+            grid-template-columns: repeat(4,25%);
             text-align: center;
             background-color: #ffcd04;
             color: white;
@@ -88,7 +88,7 @@
               width: 100%;
               height: auto;
               display: grid;
-              grid-template-columns: repeat(6,17.5% 17.5% 17.5% 17.5% 15% 15%);
+              grid-template-columns: repeat(4,25%);
               text-align: center;
               color: black;
               p{
@@ -116,7 +116,7 @@
             width: 100%;
             height: auto;
             display: grid;
-            grid-template-columns: repeat(4,18% 18% 18% 46%);
+            grid-template-columns: repeat(4,25%);
             text-align: center;
             border-radius: 7px;
           background-color: #ffcd04;
@@ -140,7 +140,7 @@
               width: 100%;
               height: auto;
               display: grid;
-              grid-template-columns: repeat(5,18% 18% 18% 23% 23%);
+              grid-template-columns: repeat(4,25%);
               text-align: center;
               color: black;
               p{
@@ -170,7 +170,7 @@
         width: 100%;
         height: auto;
         display: grid;
-        grid-template-columns: repeat(6,14% 14% 14% 14% 14% 30%);
+        grid-template-columns: repeat(5,1fr);
         background-color: #ffcd04;
         color: white;
         border-radius: 10px;
@@ -188,11 +188,11 @@
         width: 100%;
         height: auto;
         display: grid;
-        grid-template-columns: repeat(7,14% 14% 14% 14% 14% 15% 15%);
+        grid-template-columns: repeat(5,1fr);
         text-align: center;
         background-color: rgb(235, 233, 233);
         p{
-          font-size: 12px;
+          font-size:70%;
           width: 95%;
           margin: auto;
           margin-right: 5%;
@@ -238,6 +238,9 @@
           margin: auto;
           margin-right: 5%;
           height: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         }
       }
@@ -252,4 +255,29 @@
         left: 0;
       }
     }
+}
+
+@media screen and(max-width:1140px) {
+  .main{
+    .boards{
+      .servicesboard{
+        display: block;
+      }
+    }
+  }
+}
+
+@media screen and(max-width:420px) {
+  .main{
+    .boards{
+      .rateboard{
+        width: 100%;
+      }
+    }
+    .CompletedTransactions{
+      button{
+        margin: auto;
+      }
+    }
+  }
 }

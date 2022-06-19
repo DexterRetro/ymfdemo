@@ -6,6 +6,7 @@ export interface BlogPost {
   blogPicture: String;
   Summary: String;
   AuthorTittle: String;
+  Status:String,
   Content: [{paragraph:String,PImage:{ImbededImg:String,caption:String}}];
   Comments: [
     {

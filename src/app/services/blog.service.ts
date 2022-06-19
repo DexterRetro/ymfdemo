@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BlogPost } from '../models/blog-post';
 import { GalleryModel } from '../models/gallery';
-import { UnverifiedBlog } from '../models/unverifiedBlog';
 
 @Injectable({
   providedIn: 'root'
@@ -16,22 +15,17 @@ export class BlogService {
   async GetBlogs ():Promise<Observable<{message:String,Blogs:BlogPost[]}>>{
     const Blogs = await this.http.get<{message:String,Blogs:BlogPost[]}>(`${environment.backendAPIURL}/blog`);
     return Blogs;
-  } 
-  async GetUnverifiedBlogs ():Promise<Observable<{message:String,Blogs:UnverifiedBlog[]}>>{
-    const Blogs = await this.http.get<{message:String,Blogs:UnverifiedBlog[]}>(`${environment.backendAPIURL}/blog/unverified`);
-    return Blogs;
-  } 
+  }
   async AproveUnverifiedBlogs (id:any):Promise<Observable<{message:String}>>{
     const Blogs = await this.http.post<{message:String}>(`${environment.backendAPIURL}/blog/unverified`,{id:id});
     return Blogs;
-  } 
+  }
 
   getImageURL(imageQuery:String){
     if(!imageQuery){
       return ''
     }
     const formatedQuery = imageQuery.split('/');
-    console.log(formatedQuery)
     const Url = `${environment.backendAPIURL}/file?folder=${formatedQuery[0]}&filename=${formatedQuery[1]}`
     return Url;
   }

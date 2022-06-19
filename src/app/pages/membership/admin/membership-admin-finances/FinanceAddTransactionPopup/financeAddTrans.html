@@ -1,6 +1,8 @@
 <h3 mat-dialog-title>ADD TRANSACTION</h3>
 <div mat-dialog-content class="detail">
-   <form [formGroup]="TransactionAddForm">
+  <mat-spinner class="uploader-status" *ngIf="loading"></mat-spinner>
+  <p *ngIf="loading">Please Wait....</p>
+   <form *ngIf="!loading" [formGroup]="TransactionAddForm">
     <mat-form-field appearance="standard" style="width: 80%">
       <mat-label>Customer Name</mat-label>
       <input
@@ -25,7 +27,7 @@
         matInput
         type="text"
         placeholder="Reference Code of Transaction"
-        formControlName="'refcode'"
+        formControlName="refcode"
       />
     </mat-form-field>
     <mat-form-field appearance="standard" style="width: 50%">
@@ -54,17 +56,39 @@
         formControlName="purpose"
       />
     </mat-form-field>
-    <mat-form-field appearance="standard" style="width: 50%">
+    <mat-form-field appearance="standard" style="width: 30%">
       <mat-label>Platform</mat-label>
       <select matNativeControl formControlName="platform">
         <option value="" selected></option>
-        <option value="Mukuru">Mukuru</option>
-        <option value="Bank Transfer">Bank Transfer</option>
+        <option value="paynow">PAYNOW</option>
+        <option value="ecocash">Ecocash</option>
+        <option value="onemoney">OneMoney</option>
+        <option value="telecash">Telecash</option>
+        <option value="mkuru">Mukuru</option>
+        <option value="banktransfer">Bank Transfer</option>
       </select>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="standard" style="width: 30%">
+      <mat-label>Payment Status</mat-label>
+      <select matNativeControl formControlName="status">
+        <option value="" selected></option>
+        <option value="completed">Payment completed</option>
+        <option value="pending">Pending Approval</option>
+      </select>
+    </mat-form-field>
+    <mat-form-field appearance="standard" style="width: 80%">
+      <mat-label>Contact Details</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Phone Number"
+        formControlName="contacts"
+      />
     </mat-form-field>
    </form>
 </div>
 <div mat-dialog-actions>
-  <button class="decline" mat-raised-button style="background-color:green;color: white;" [disabled]="!TransactionAddForm.valid">Add <i class="far fa-plus-square"></i></button>
-  <button class="decline" mat-button mat-dialog-close cdkFocusInitial>Cancel</button>
+  <button (click)="AddTransaction()" class="decline" mat-raised-button style="background-color:green;color: white;" [disabled]="!TransactionAddForm.valid">Add <i class="far fa-plus-square"></i></button>
+  <button (click)="Close()" class="decline" mat-button mat-dialog-close cdkFocusInitial>Cancel</button>
 </div>

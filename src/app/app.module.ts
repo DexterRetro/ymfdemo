@@ -23,6 +23,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatListModule} from '@angular/material/list';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -44,7 +45,7 @@ import { BlogListComponent } from './pages/blog/blog-list/blog-list.component';
 import { BlogFullViewComponent } from './pages/blog/blog-full-view/blog-full-view.component';
 import { ErrorCatchingInterceptor } from './interceptors/error-catching.interceptor';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { FinanceAddTrans, FinanceAprove, FinanceRate, FinanceService, MembershipAdminFinancesComponent } from './pages/membership/admin/membership-admin-finances/membership-admin-finances.component';
+import { FinanceAddTrans, FinanceAprove, FinanceManageTrans, FinanceRate, FinanceService, MembershipAdminFinancesComponent } from './pages/membership/admin/membership-admin-finances/membership-admin-finances.component';
 import {MembershipBlogComponent } from './pages/membership/membership-nav/membership-blog/membership-blog.component';
 import { TestpageComponent } from './pages/testpage/testpage.component';
 import { VerifyNewUserpopup } from './templates/VerifyNewUserPopup/VerifyNewUser-popup';
@@ -82,6 +83,7 @@ import { BlogUploadPopup } from './templates/BlogUploadPopup/BlogUpload-popup';
     GalleryComponent,
     BlogUploadPopup,
     FinanceAddTrans,
+    FinanceManageTrans,
     FinanceAprove,
     FinanceRate,
     FinanceService
@@ -112,7 +114,8 @@ import { BlogUploadPopup } from './templates/BlogUploadPopup/BlogUpload-popup';
     MatTooltipModule,
     ShareModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatListModule
 
   ],
   providers: [

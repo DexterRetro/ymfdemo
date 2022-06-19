@@ -18,6 +18,7 @@ export class BlogFullViewComponent implements OnInit {
     blogPicture:'',
     Summary: '',
     AuthorTittle:'',
+    Status:'',
     Content: [{paragraph:'',PImage:{ImbededImg:'',caption:''}}],
     Comments: [
       {
@@ -30,7 +31,7 @@ export class BlogFullViewComponent implements OnInit {
   currentURL='';
   commentForm:FormGroup |any ;
   constructor(private blogServ:BlogService,private activerouter:ActivatedRoute,
-              private router:Router,private fb:FormBuilder,private datepipe: DatePipe) { 
+              private router:Router,private fb:FormBuilder,private datepipe: DatePipe) {
     this.currentURL = window.location.href;
     const id = activerouter.snapshot.paramMap.get('id');
     if(!id){
@@ -48,7 +49,7 @@ export class BlogFullViewComponent implements OnInit {
             return;
           }
         });
-        
+
       })
     });
     this.createCommentForm();
